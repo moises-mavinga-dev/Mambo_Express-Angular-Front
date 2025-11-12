@@ -1,0 +1,261 @@
+<div class="reservas-container">
+
+    <!-- ========================================
+         HEADER
+    ======================================== -->
+    <div class="page-header">
+        <div class="header-content">
+            <h1>Minhas Reservas</h1>
+            <p>Gerencie suas viagens e acompanhe o status das reservas</p>
+        </div>
+        <button class="btn-nova-reserva" (click)="novaReserva()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Nova Reserva
+        </button>
+    </div>
+
+    <!-- ========================================
+         MENSAGENS
+    ======================================== -->
+    <div *ngIf="mensagemSucesso" class="alert alert-success">
+        ✓ {{ mensagemSucesso }}
+    </div>
+
+    <div *ngIf="erro" class="alert alert-error">
+        ✗ {{ erro }}
+    </div>
+
+    <!-- ========================================
+         ESTATÍSTICAS
+    ======================================== -->
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="stat-icon">📦</div>
+            <div class="stat-info">
+                <span class="stat-value">{{ estatisticas.total }}</span>
+                <span class="stat-label">Total</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">⏳</div>
+            <div class="stat-info">
+                <span class="stat-value">{{ estatisticas.pendentes }}</span>
+                <span class="stat-label">Pendentes</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">✓</div>
+            <div class="stat-info">
+                <span class="stat-value">{{ estatisticas.confirmadas }}</span>
+                <span class="stat-label">Confirmadas</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">💳</div>
+            <div class="stat-info">
+                <span class="stat-value">{{ estatisticas.pagas }}</span>
+                <span class="stat-label">Pagas</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">🏁</div>
+            <div class="stat-info">
+                <span class="stat-value">{{ estatisticas.concluidas }}</span>
+                <span class="stat-label">Concluídas</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         FILTROS E ORDENAÇÃO
+    ======================================== -->
+    <div class="filters-container">
+        <div class="filter-tabs">
+            <button class="filter-tab" [class.active]="filtroStatus === 'todas'" (click)="mudarFiltro('todas')">
+                Todas ({{ estatisticas.total }})
+            </button>
+            <button class="filter-tab" [class.active]="filtroStatus === 'pendente'" (click)="mudarFiltro('pendente')">
+                Pendentes ({{ estatisticas.pendentes }})
+            </button>
+            <button class="filter-tab" [class.active]="filtroStatus === 'confirmada'" (click)="mudarFiltro('confirmada')">
+                Confirmadas ({{ estatisticas.confirmadas }})
+            </button>
+            <button class="filter-tab" [class.active]="filtroStatus === 'paga'" (click)="mudarFiltro('paga')">
+                Pagas ({{ estatisticas.pagas }})
+            </button>
+            <button class="filter-tab" [class.active]="filtroStatus === 'cancelada'" (click)="mudarFiltro('cancelada')">
+                Canceladas ({{ estatisticas.canceladas }})
+            </button>
+        </div>
+
+        <div class="sort-container">
+            <label for="ordenacao">Ordenar por:</label>
+            <select id="ordenacao" class="sort-select" [(ngModel)]="ordenacao" (change)="mudarOrdenacao($event)">
+                <option value="recentes">Mais recentes</option>
+                <option value="antigas">Mais antigas</option>
+                <option value="viagem-proxima">Viagem mais próxima</option>
+                <option value="viagem-distante">Viagem mais distante</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- ========================================
+         LOADING
+    ======================================== -->
+    <div *ngIf="loading" class="loading-container">
+        <div class="spinner"></div>
+        <p>Carregando suas reservas...</p>
+    </div>
+
+    <!-- ========================================
+         LISTA DE RESERVAS
+    ======================================== -->
+    <div *ngIf="!loading && reservasFiltradas.length > 0" class="reservas-list">
+        <div *ngFor="let reserva of reservasFiltradas" class="reserva-card" [class.viagem-proxima]="isViagemProxima(reserva.dataViagem)">
+
+            <!-- Alerta de viagem próxima -->
+            <div *ngIf="isViagemProxima(reserva.dataViagem)" class="alert-viagem-proxima">
+                🔔 Viagem em {{ diasAteViagem(reserva.dataViagem) }} dia(s)!
+            </div>
+
+            <div class="card-header">
+                <div class="header-left">
+                    <h3>{{ reserva.nomePacote}}</h3>
+                    <p class="destino">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg> {{ reserva.nomeDestino}}
+                    </p>
+                </div>
+                <div class="header-right">
+                    <span class="status-badge" [ngClass]="getStatusClass(reserva.StatuReserva)">
+                        {{ getStatusIcon(reserva.StatuReserva) }} {{ reserva.StatuReserva }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-icon">📅</span>
+                        <div>
+                            <span class="info-label">Data da Reserva</span>
+                            <span class="info-value">{{ formatarData(reserva.dataReserva) }}</span>
+
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-icon">✈️</span>
+                        <div>
+                            <span class="info-label">Data da Viagem</span>
+                            <span class="info-value">{{ formatarDataCompleta(reserva.dataViagem) }}</span>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-icon">👥</span>
+                        <div>
+                            <span class="info-label">Pessoas</span>
+                            <span class="info-value">{{ reserva.quantidadePessoas }}</span>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-icon">💰</span>
+                        <div>
+                            <span class="info-label">Valor</span>
+                            <span class="info-value">{{ reserva.valorTotal| currency:'kz,':'symbol':'1.0-0' }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informação de Pagamento -->
+                <div *ngIf="reserva.pagamentoConfirmado" class="pagamento-info">
+                    <span class="info-icon">💳</span>
+                    <span>Pago via {{ reserva.pagamentoConfirmado}}</span>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <button class="btn-secondary btn-sm" (click)="verDetalhes(reserva)">
+                    Ver Detalhes
+                </button>
+
+                <div class="action-buttons">
+                    <button *ngIf="podePagar(reserva)" class="btn-primary btn-sm" (click)="irParaPagamento(reserva)">
+                        💳 Pagar Agora
+                    </button>
+
+                    <button *ngIf="podeCancelar(reserva)" class="btn-danger btn-sm" (click)="abrirModalCancelar(reserva)">
+                        ✗ Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         EMPTY STATE
+    ======================================== -->
+    <div *ngIf="!loading && reservasFiltradas.length === 0" class="empty-state">
+        <div class="empty-icon">📭</div>
+        <h3>Nenhuma reserva encontrada</h3>
+        <p *ngIf="filtroStatus === 'todas'">
+            Você ainda não fez nenhuma reserva. Que tal explorar nossos destinos?
+        </p>
+        <p *ngIf="filtroStatus !== 'todas'">
+            Não há reservas com o status "{{ filtroStatus }}".
+        </p>
+        <button class="btn-primary" (click)="novaReserva()">
+            Explorar Destinos
+        </button>
+    </div>
+
+</div>
+
+<!-- ========================================
+     MODAL DE CANCELAMENTO
+======================================== -->
+<div *ngIf="showCancelModal" class="modal-overlay" (click)="fecharModalCancelar()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h3>Cancelar Reserva</h3>
+            <button class="btn-close" (click)="fecharModalCancelar()">×</button>
+        </div>
+
+        <div class="modal-body">
+            <div *ngIf="reservaSelecionada" class="reserva-info">
+                <p><strong>Pacote:</strong> {{ reservaSelecionada.nomePacote }}</p>
+                <p><strong>Destino:</strong> {{ reservaSelecionada.nomeDestino }}</p>
+                <p><strong>Data da Viagem:</strong> {{ formatarDataCompleta(reservaSelecionada.dataViagem) }}</p>
+            </div>
+
+            <div class="form-group">
+                <label>Motivo do Cancelamento <span class="required">*</span></label>
+                <textarea class="form-textarea" [(ngModel)]="motivoCancelamento" placeholder="Por favor, informe o motivo do cancelamento..." rows="4" [disabled]="cancelando"></textarea>
+            </div>
+
+            <div class="alert alert-warning">
+                ⚠️ <strong>Atenção:</strong> Esta ação não pode ser desfeita. Verifique a política de cancelamento antes de prosseguir.
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-secondary" (click)="fecharModalCancelar()" [disabled]="cancelando">
+                Voltar
+            </button>
+            <button class="btn-danger" (click)="confirmarCancelamento()" [disabled]="cancelando || !motivoCancelamento.trim()">
+                {{ cancelando ? 'Cancelando...' : 'Confirmar Cancelamento' }}
+            </button>
+        </div>
+    </div>
+</div>

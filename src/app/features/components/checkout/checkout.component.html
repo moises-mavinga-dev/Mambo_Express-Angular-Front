@@ -1,0 +1,181 @@
+<div class="checkout-container">
+    <!-- Success Modal -->
+    <div class="modal-overlay" *ngIf="showSuccessModal">
+        <div class="modal success-modal">
+            <div class="success-icon">✓</div>
+            <h2>Pagamento Aprovado!</h2>
+            <p>Sua reserva foi confirmada com sucesso.</p>
+            <p class="redirect-text">Redirecionando...</p>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div class="modal-overlay" *ngIf="showErrorModal" (click)="fecharModalErro()">
+        <div class="modal error-modal" (click)="$event.stopPropagation()">
+            <div class="error-icon">✕</div>
+            <h2>Erro no Pagamento</h2>
+            <p>{{ errorMessage }}</p>
+            <button class="btn-modal" (click)="fecharModalErro()">Tentar Novamente</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="checkout-header">
+        <button class="btn-back" (click)="router.navigate(['/'])">
+      ← Voltar
+    </button>
+        <h1>Finalizar Pagamento</h1>
+        <div class="security-badge">
+            🔒 Pagamento Seguro
+        </div>
+    </div>
+
+    <!-- Loading -->
+    <div *ngIf="loadingReserva" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Carregando informações...</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="checkout-content" *ngIf="!loadingReserva && reserva">
+        <!-- Left Column: Payment Form -->
+        <div class="payment-section">
+            <div class="section-card">
+                <h2>Escolha o Método de Pagamento</h2>
+
+                <!-- Payment Methods -->
+                <div class="payment-methods">
+                    <div *ngFor="let metodo of metodosPagamento" class="payment-method" [class.selected]="formData.metodoPagamento === metodo.value" (click)="formData.metodoPagamento = metodo.value">
+                        <span class="method-icon">{{ metodo.icon }}</span>
+                        <span class="method-label">{{ metodo.label }}</span>
+                        <span class="radio-check"></span>
+                    </div>
+                </div>
+
+                <!-- Card Details -->
+                <div class="card-details" *ngIf="precisaCartao && formData.metodoPagamento">
+                    <h3>Dados do Cartão</h3>
+
+                </div>
+
+                <!-- Phone Details -->
+                <div class="phone-details" *ngIf="precisaTelefone && formData.metodoPagamento">
+                    <h3>Dados para Pagamento</h3>
+
+                    <div class="form-group">
+                        <label>Número de Telefone</label>
+                        <input type="tel" class="form-input" placeholder="+244 923 456 789" [(ngModel)]="formData.telefone" required>
+                    </div>
+
+                    <div class="info-box">
+                        <p>Você receberá uma notificação no seu telefone para confirmar o pagamento.</p>
+                    </div>
+                </div>
+
+                <!-- Transfer Details -->
+                <div class="transfer-details" *ngIf="formData.metodoPagamento === MetodoPagamento.Transferencia">
+                    <h3>Dados Bancários</h3>
+
+                    <div class="bank-info">
+                        <div class="info-row">
+                            <span class="label">Banco:</span>
+                            <span class="value">BAI - Banco Angolano de Investimentos</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Conta:</span>
+                            <span class="value">000123456789</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">IBAN:</span>
+                            <span class="value">AO06 0001 0000 0012 3456 7890 0</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Titular:</span>
+                            <span class="value">ViajarAngola Turismo LDA</span>
+                        </div>
+                    </div>
+
+                    <div class="info-box warning">
+                        <p><strong>Importante:</strong> Após realizar a transferência, envie o comprovante para confirmação.</p>
+                    </div>
+                </div>
+
+                <!-- Terms -->
+                <div class="terms-section">
+                    <label class="checkbox-label">
+            <input 
+              type="checkbox" 
+              [(ngModel)]="formData.aceitoTermos">
+            <span>Aceito os <a href="#">termos e condições</a> e a <a href="#">política de privacidade</a></span>
+          </label>
+                </div>
+
+                <!-- Submit Button -->
+                <button class="btn-pagar" (click)="processarPagamento()" [disabled]="processando || !formData.aceitoTermos">
+          <span *ngIf="processando" class="loading-spinner"></span>
+          {{ processando ? 'Processando...' : 'Confirmar Pagamento' }}
+        </button>
+            </div>
+        </div>
+
+        <!-- Right Column: Order Summary -->
+        <div class="summary-section">
+            <div class="section-card">
+                <h2>Resumo da Reserva</h2>
+
+                <!-- Package Info -->
+                <div class="package-summary">
+
+                    <div class="package-info">
+                        <h3>{{ reserva.pacote.nomePacote }}</h3>
+                        <p class="destination">
+                            📍 {{ reserva.destino.nomeCidade|| 'Destino não especificado' }}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Reservation Details -->
+                <div class="reservation-details">
+                    <div class="detail-row">
+                        <span class="label">Data da Viagem:</span>
+                        <span class="value">{{ reserva.dataViagem | date:'dd/MM/yyyy' }}</span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="label">Status:</span>
+                        <span class="badge" [class]="'badge-' + reserva.status.toLowerCase()">
+              {{ reserva.status }}
+            </span>
+                    </div>
+                </div>
+
+                <!-- Price Breakdown -->
+                <div class="price-breakdown">
+                    <h3>Detalhes do Pagamento</h3>
+
+                    <div class="price-row">
+                        <span>Pacote</span>
+                        <span>{{ reserva.pacote.preco | currency:'AOA' }}</span>
+                    </div>
+
+                    <div class="price-row">
+                        <span>Taxa de Serviço</span>
+                        <span>{{ 0 | currency:'AOA' }}</span>
+                    </div>
+
+                    <div class="price-row total">
+                        <span>Total</span>
+                        <span>{{ calcularTotal() | currency:'AOA' }}</span>
+                    </div>
+                </div>
+
+                <!-- Security Info -->
+                <div class="security-info">
+                    <p>🔒 Seus dados estão protegidos</p>
+                    <p>✓ Transação 100% segura</p>
+                    <p>✓ Criptografia SSL</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

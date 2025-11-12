@@ -1,0 +1,47 @@
+<section class="features-section">
+    <div class="container">
+        <h2 class="section-title">Conheça os nossos Pacotes</h2>
+
+        <div class="carousel-wrapper">
+            <!-- Botão anterior -->
+            <button class="carousel-btn carousel-btn-prev" (click)="prevSlide()" [disabled]="currentIndex === 0 && !autoPlay">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M15 18l-6-6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+            <!-- Carrossel -->
+            <div class="carousel-container">
+                <div class="features-grid" [style.transform]="'translateX(-' + (currentIndex * slideWidth) + '%)'">
+                    <div *ngFor="let pacote of pacotes; let i = index" class="feature-card" [class.active]="isCardVisible(i)">
+
+                        <div class="feature-icon">🌍</div>
+                        <h3>{{ pacote.nomePacote}}</h3>
+                        <p>{{ pacote.preco || pacote.duracao }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botão próximo -->
+            <button class="carousel-btn carousel-btn-next" (click)="nextSlide()" [disabled]="currentIndex >= maxIndex && !autoPlay">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M9 18l6-6-6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+        </div>
+
+        <!-- Dots -->
+        <div class="carousel-indicators">
+            <button *ngFor="let dot of dots; let i = index" class="indicator-dot" [class.active]="i === currentIndex" (click)="goToSlide(i)">
+      </button>
+        </div>
+
+        <!-- Controlo autoplay -->
+        <div class="carousel-controls">
+            <button class="control-btn" (click)="toggleAutoPlay()">
+        {{ autoPlay ? '⏸ Pausar' : '▶ Auto-play' }}
+      </button>
+        </div>
+    </div>
+</section>

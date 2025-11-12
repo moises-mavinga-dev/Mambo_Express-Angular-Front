@@ -1,0 +1,60 @@
+<div class="registro-container">
+    <div class="registro-card">
+        <div class="header">
+            <h1>Criar Conta</h1>
+        </div>
+
+        <div *ngIf="errorMessage" class="error-alert">
+            ⚠️ {{ errorMessage }}
+        </div>
+
+        <form class="registro-form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label>Nome Completo *</label>
+                <input type="text" [(ngModel)]="userData.nomeUsuario" name="nome" required maxlength="60" placeholder="Seu nome completo" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label>Email *</label>
+                <input type="email" [(ngModel)]="userData.email" name="email" required placeholder="seu@email.com" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label>Senha *</label>
+                <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="userData.password" name="password" required minlength="6" maxlength="12" placeholder="Mínimo 6 caracteres" class="form-input">
+
+            </div>
+
+            <div class="form-group">
+                <label>Confirmar Senha *</label>
+                <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" required placeholder="Confirme sua senha" class="form-input" [class.input-error]="submitted && userData.password !== confirmPassword">
+                <small *ngIf="submitted && userData.password !== confirmPassword" class="error-text">
+              As senhas não coincidem
+            </small>
+            </div>
+
+
+            <div class="terms-checkbox">
+                <label>
+              <input 
+                type="checkbox" 
+                [(ngModel)]="acceptTerms" 
+                name="acceptTerms">
+              <span>
+                Aceito os <a routerLink="/termos" class="link">Termos de Uso</a> 
+                e <a routerLink="/privacidade" class="link">Política de Privacidade</a>
+              </span>
+            </label>
+            </div>
+
+            <button type="submit" class="btn-registro" [disabled]="loading || !acceptTerms">
+            {{ loading ? 'Criando conta...' : 'Criar Conta' }}
+          </button>
+        </form>
+
+        <div class="login-link">
+            <p>Já tem uma conta?</p>
+            <a routerLink="/login" class=" link-login ">Faça login aqui</a>
+        </div>
+    </div>
+</div>

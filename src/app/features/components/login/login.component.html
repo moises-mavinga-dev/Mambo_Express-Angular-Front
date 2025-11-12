@@ -1,0 +1,51 @@
+<div class="login-container">
+    <div class="login-card">
+        <!-- Logo -->
+        <div class="logo-section">
+            <div class="logo-icon">✈️</div>
+            <h1>VIAJAR ANGOLA</h1>
+            <p>Faça login para continuar</p>
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="error-alert">
+            <span class="error-icon">⚠️</span> {{ errorMessage }}
+        </div>
+
+        <!-- Login Form -->
+        <form class="login-form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" [(ngModel)]="credentials.email" name="email" required placeholder="seu@email.com" class="form-input" [class.input-error]="submitted && !credentials.email">
+            </div>
+
+            <div class="form-group">
+                <label>Senha</label>
+                <div class="password-input">
+                    <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="credentials.password" name="password" required placeholder="••••••••" class="form-input" [class.input-error]="submitted && !credentials.password">
+                    <button type="button" class="toggle-password" (click)="togglePassword()">
+                {{ showPassword ? '👁️' : '👁️‍🗨️' }}
+              </button>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <label class="checkbox-label">
+              <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe">
+              <span>Lembrar-me</span>
+            </label>
+                <a routerLink="/auth/esqueci-senha" class="link-text">Esqueceu a senha?</a>
+            </div>
+
+            <button type="submit" class="btn-login" [disabled]="loading">
+            {{ loading ? 'Entrando...' : 'Entrar' }}
+          </button>
+        </form>
+
+        <!-- Register Link -->
+        <div class="register-section">
+            <p>Não tem uma conta?</p>
+            <a routerLink="/registro" class="link-register">Cadastre-se aqui</a>
+        </div>
+    </div>
+</div>
