@@ -8,7 +8,6 @@
             <p class="redirect-text">Redirecionando...</p>
         </div>
     </div>
-
     <!-- Error Modal -->
     <div class="modal-overlay" *ngIf="showErrorModal" (click)="fecharModalErro()">
         <div class="modal error-modal" (click)="$event.stopPropagation()">
@@ -73,7 +72,8 @@
                 </div>
 
                 <!-- Transfer Details -->
-                <div class="transfer-details" *ngIf="formData.metodoPagamento === MetodoPagamento.Transferencia">
+
+                <div class="transfer-details" *ngIf="precisaTransferencia">
                     <h3>Dados Bancários</h3>
 
                     <div class="bank-info">
@@ -129,7 +129,7 @@
                     <div class="package-info">
                         <h3>{{ reserva.pacote.nomePacote }}</h3>
                         <p class="destination">
-                            📍 {{ reserva.destino.nomeCidade|| 'Destino não especificado' }}
+                            📍 {{ reserva.destino.descricao}}
                         </p>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
 
                     <div class="detail-row">
                         <span class="label">Status:</span>
-                        <span class="badge" [class]="'badge-' + reserva.status.toLowerCase()">
+                        <span class="badge" [class]="'badge-' + reserva.status.toString">
               {{ reserva.status }}
             </span>
                     </div>

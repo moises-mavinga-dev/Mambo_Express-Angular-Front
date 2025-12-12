@@ -51,7 +51,7 @@
         <div class="stat-card">
             <div class="stat-icon">✓</div>
             <div class="stat-info">
-                <span class="stat-value">{{ estatisticas.confirmadas }}</span>
+                <span class="stat-value">{{ estatisticas.confirmados }}</span>
                 <span class="stat-label">Confirmadas</span>
             </div>
         </div>
@@ -59,7 +59,7 @@
         <div class="stat-card">
             <div class="stat-icon">💳</div>
             <div class="stat-info">
-                <span class="stat-value">{{ estatisticas.pagas }}</span>
+                <span class="stat-value">{{ estatisticas.pagos }}</span>
                 <span class="stat-label">Pagas</span>
             </div>
         </div>
@@ -84,14 +84,14 @@
             <button class="filter-tab" [class.active]="filtroStatus === 'pendente'" (click)="mudarFiltro('pendente')">
                 Pendentes ({{ estatisticas.pendentes }})
             </button>
-            <button class="filter-tab" [class.active]="filtroStatus === 'confirmada'" (click)="mudarFiltro('confirmada')">
-                Confirmadas ({{ estatisticas.confirmadas }})
+            <button class="filter-tab" [class.active]="filtroStatus === 'confirmado'" (click)="mudarFiltro('confirmado')">
+                Confirmadas ({{ estatisticas.confirmados }})
             </button>
-            <button class="filter-tab" [class.active]="filtroStatus === 'paga'" (click)="mudarFiltro('paga')">
-                Pagas ({{ estatisticas.pagas }})
+            <button class="filter-tab" [class.active]="filtroStatus === 'pago'" (click)="mudarFiltro('pago')">
+                Pagas ({{ estatisticas.pagos }})
             </button>
-            <button class="filter-tab" [class.active]="filtroStatus === 'cancelada'" (click)="mudarFiltro('cancelada')">
-                Canceladas ({{ estatisticas.canceladas }})
+            <button class="filter-tab" [class.active]="filtroStatus === 'cancelado'" (click)="mudarFiltro('cancelando')">
+                Canceladas ({{ estatisticas.cancelados }})
             </button>
         </div>
 
@@ -122,7 +122,9 @@
 
             <!-- Alerta de viagem próxima -->
             <div *ngIf="isViagemProxima(reserva.dataViagem)" class="alert-viagem-proxima">
+
                 🔔 Viagem em {{ diasAteViagem(reserva.dataViagem) }} dia(s)!
+
             </div>
 
             <div class="card-header">
@@ -183,79 +185,78 @@
                     <span class="info-icon">💳</span>
                     <span>Pago via {{ reserva.pagamentoConfirmado}}</span>
                 </div>
-            </div>
 
-            <div class="card-footer">
-                <button class="btn-secondary btn-sm" (click)="verDetalhes(reserva)">
+                <div class="card-footer">
+                    <button class="btn-secondary btn-sm" (click)="verDetalhes(reserva)">
                     Ver Detalhes
                 </button>
 
-                <div class="action-buttons">
-                    <button *ngIf="podePagar(reserva)" class="btn-primary btn-sm" (click)="irParaPagamento(reserva)">
+                    <div class="action-buttons">
+                        <button *ngIf="podePagar(reserva)" class="btn-primary btn-sm" (click)="irParaPagamento(reserva)">
                         💳 Pagar Agora
                     </button>
 
-                    <button *ngIf="podeCancelar(reserva)" class="btn-danger btn-sm" (click)="abrirModalCancelar(reserva)">
+                        <button *ngIf="podeCancelar(reserva)" class="btn-danger btn-sm" (click)="abrirModalCancelar(reserva)">
                         ✗ Cancelar
                     </button>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- ========================================
+         EMPTY STATE
+    ======================================== -->
+        <div *ngIf="!loading && reservasFiltradas.length === 0" class="empty-state">
+            <div class="empty-icon">📭</div>
+            <h3>Nenhuma reserva encontrada</h3>
+            <p *ngIf="filtroStatus === 'todas'">
+                Você ainda não fez nenhuma reserva. Que tal explorar nossos destinos?
+            </p>
+            <p *ngIf="filtroStatus !== 'todas'">
+                Não há reservas com o status "{{ filtroStatus }}".
+            </p>
+            <button class="btn-primary" (click)="novaReserva()">
+            Explorar Destinos
+        </button>
+        </div>
+
     </div>
 
     <!-- ========================================
-         EMPTY STATE
-    ======================================== -->
-    <div *ngIf="!loading && reservasFiltradas.length === 0" class="empty-state">
-        <div class="empty-icon">📭</div>
-        <h3>Nenhuma reserva encontrada</h3>
-        <p *ngIf="filtroStatus === 'todas'">
-            Você ainda não fez nenhuma reserva. Que tal explorar nossos destinos?
-        </p>
-        <p *ngIf="filtroStatus !== 'todas'">
-            Não há reservas com o status "{{ filtroStatus }}".
-        </p>
-        <button class="btn-primary" (click)="novaReserva()">
-            Explorar Destinos
-        </button>
-    </div>
-
-</div>
-
-<!-- ========================================
      MODAL DE CANCELAMENTO
 ======================================== -->
-<div *ngIf="showCancelModal" class="modal-overlay" (click)="fecharModalCancelar()">
-    <div class="modal-content" (click)="$event.stopPropagation()">
-        <div class="modal-header">
-            <h3>Cancelar Reserva</h3>
-            <button class="btn-close" (click)="fecharModalCancelar()">×</button>
-        </div>
-
-        <div class="modal-body">
-            <div *ngIf="reservaSelecionada" class="reserva-info">
-                <p><strong>Pacote:</strong> {{ reservaSelecionada.nomePacote }}</p>
-                <p><strong>Destino:</strong> {{ reservaSelecionada.nomeDestino }}</p>
-                <p><strong>Data da Viagem:</strong> {{ formatarDataCompleta(reservaSelecionada.dataViagem) }}</p>
+    <div *ngIf="showCancelModal" class="modal-overlay" (click)="fecharModalCancelar()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h3>Cancelar Reserva</h3>
+                <button class="btn-close" (click)="fecharModalCancelar()">×</button>
             </div>
 
-            <div class="form-group">
-                <label>Motivo do Cancelamento <span class="required">*</span></label>
-                <textarea class="form-textarea" [(ngModel)]="motivoCancelamento" placeholder="Por favor, informe o motivo do cancelamento..." rows="4" [disabled]="cancelando"></textarea>
+            <div class="modal-body">
+                <div *ngIf="reservaSelecionada" class="reserva-info">
+                    <p><strong>Pacote:</strong> {{ reservaSelecionada.nomePacote }}</p>
+                    <p><strong>Destino:</strong> {{ reservaSelecionada.nomeDestino }}</p>
+                    <p><strong>Data da Viagem:</strong> {{ formatarDataCompleta(reservaSelecionada.dataViagem) }}</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Motivo do Cancelamento <span class="required">*</span></label>
+                    <textarea class="form-textarea" [(ngModel)]="motivoCancelamento" placeholder="Por favor, informe o motivo do cancelamento..." rows="4" [disabled]="cancelando"></textarea>
+                </div>
+
+                <div class="alert alert-warning">
+                    ⚠️ <strong>Atenção:</strong> Esta ação não pode ser desfeita. Verifique a política de cancelamento antes de prosseguir.
+                </div>
             </div>
 
-            <div class="alert alert-warning">
-                ⚠️ <strong>Atenção:</strong> Esta ação não pode ser desfeita. Verifique a política de cancelamento antes de prosseguir.
-            </div>
-        </div>
-
-        <div class="modal-footer">
-            <button class="btn-secondary" (click)="fecharModalCancelar()" [disabled]="cancelando">
+            <div class="modal-footer">
+                <button class="btn-secondary" (click)="fecharModalCancelar()" [disabled]="cancelando">
                 Voltar
             </button>
-            <button class="btn-danger" (click)="confirmarCancelamento()" [disabled]="cancelando || !motivoCancelamento.trim()">
+                <button class="btn-danger" (click)="confirmarCancelamento()" [disabled]="cancelando || !motivoCancelamento.trim()">
                 {{ cancelando ? 'Cancelando...' : 'Confirmar Cancelamento' }}
             </button>
+            </div>
         </div>
     </div>
-</div>

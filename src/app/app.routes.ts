@@ -62,14 +62,34 @@ export const routes: Routes = [
 { path: 'reserva/criar/:id', component: CriarReservaComponent } ,
  {
    path: 'minhas-reservas',
+    canActivate: [authGuard],
    loadComponent: () => import('./features/components/minha-reserva/minha-reserva.component')
      .then(m => m.MinhaReservaComponent)
  },
   {
-    path: 'pagamento/checkout',
-    loadComponent: () => import('./features/components/checkout/checkout.component')
-      .then(m => m.CheckoutComponent)
+   path: 'minhas-reservas/:id',
+    canActivate: [authGuard],
+   loadComponent: () => import('./features/components/minha-reserva/minha-reserva.component')
+     .then(m => m.MinhaReservaComponent)
+ },
+ 
+  // ==================== ROTAS DE PAGAMENTO ====================
+  
+  // Checkout - Processar Pagamento
+  {
+    path: 'checkout/:id',
+    loadComponent: () => import('./features/components/checkout/checkout.component').then(m => m.CheckoutComponent),
+    
+    //data: { title: 'Finalizar Pagamento' }
   },
+ 
+ {
+   path: 'checkout',
+   loadComponent: () => import('./features/components/checkout/checkout.component').then(m => m.CheckoutComponent),
+   
+ },
+ 
+   
 
      {
     path: 'usuariotable',
@@ -91,19 +111,6 @@ export const routes: Routes = [
           .then(m => m.DetalheReservaComponent)
       },*/
 
-      // ✅ NOVAS ROTAS DE PAGAMENTO
-     /* {
-        path: 'pagamento/checkout/:id',
-        canActivate: [authGuard],
-        loadComponent: () => import('./features/components/checkout/checkout.component')
-          .then(m => m.CheckoutComponent)
-      },
-      {
-        path: 'pagamento/confirmacao/:id',
-        canActivate: [authGuard],
-        loadComponent: () => import('./features/pagamentos/components/confirmacao/confirmacao.component')
-          .then(m => m.ConfirmacaoComponent)
-      },*/
 
 
 

@@ -20,29 +20,31 @@ export interface Reserva {
   pagamento?: Pagamento;
   
 }
-
 export enum StatuReserva {
-  Pendente = 'Pendente',
-  Confirmada = 'Confirmada',
-  Paga = 'Paga',
-  Cancelada = 'Cancelada',
-  Concluida = 'Concluida'
+  Pendente ,
+  Confirmado ,
+  Pago ,
+  Cancelado ,
+  Concluida
 }
+
 
 // ✅ APENAS OS CAMPOS NECESSÁRIOS PARA CRIAR
 export interface CriarReservaDto {
- // usuarioId?: string;
-  nomeUsuario?: string;
-  nomePacote?: string;
-   quantidadePessoas:number;
-  dataReserva: Date;
+  nomeUsuario: string;    // Nome do usuário (não ID)
+  nomePacote: string;     // Nome do pacote (não ID)
+  nomeCidade: string;     // Nome da cidade (não ID)
+  quantidadePessoas: number;
   dataViagem: Date;
+
 }
 
 export interface ReservaResponseDto {
  // usuarioId?: string;
-  Usuario?: string;
-  Pacote?: string;
+ id: string;
+  nomeUsuario?: string;
+   nomeDestino: string;
+  nomePacote?: string;
   quantidadePessoas:number;
   dataReserva: Date;
   dataViagem: Date;
@@ -51,7 +53,7 @@ export interface ReservaResponseDto {
 export interface  MinhasReservasDto{
     id: string;
    nomeDestino: string;
- pais: string;
+// pais: string;
   nomePacote?: string;
 quantidadePessoas:number;
 valorTotal:number;

@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PagamentoService } from '../../../services/pagamento/pagamento.service';
 import { ReservaService } from '../../../services/reserva/reserva.service';
 import { 
-  ProcessarPagamentoDto, 
-  MetodoPagamento, 
-  PagamentoStatus 
+  CriarPagamentoDto, 
+  MetodosPagamentoValidos,
+  ResultadoPagamentoDto
 } from '../../models/pagamento-model/pagamento.model';
 import { Reserva } from '../../models/reserva-model/reserva.model';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-checkout',
@@ -29,6 +30,7 @@ export class CheckoutComponent implements OnInit {
     nomeCartao: '',
     validadeCartao: '',
     telefone: '',
+    cvv: '',
     aceitoTermos: false
   };
 
@@ -39,16 +41,21 @@ export class CheckoutComponent implements OnInit {
   showSuccessModal = false;
   showErrorModal = false;
   errorMessage = '';
+  codigoTransacao = '';
   
-  // Enums
-  MetodoPagamento = MetodoPagamento;
+  // Métodos de pagamento (mapeados para a API)
   metodosPagamento = [
-    { value: MetodoPagamento.CartaoCredito, label: 'Cartão de Crédito', icon: '💳' },
-    { value: MetodoPagamento.CartaoDebito, label: 'Cartão de Débito', icon: '💳' },
-    { value: MetodoPagamento.Transferencia, label: 'Transferência Bancária', icon: '🏦' },
-    { value: MetodoPagamento.Express, label: 'Unitel Express', icon: '📱' },
-    { value: MetodoPagamento.Multicaixa, label: 'Multicaixa Express', icon: '💰' }
+    { value: 'Cartao', label: 'Cartão de Crédito/Débito', icon: '💳' },
+    { value: 'PIX', label: 'PIX', icon: '📱' },
+    { value: 'Boleto', label: 'Boleto Bancário', icon: '🧾' },
+    { value: 'TransferenciaBancaria', label: 'Transferência Bancária', icon: '🏦' }
   ];
+
+  // Constantes para uso no template
+  readonly METODO_CARTAO = 'Cartao';
+  readonly METODO_PIX = 'PIX';
+  readonly METODO_BOLETO = 'Boleto';
+  readonly METODO_TRANSFERENCIA = 'TransferenciaBancaria';
 
   constructor(
     private route: ActivatedRoute,
@@ -89,13 +96,19 @@ export class CheckoutComponent implements OnInit {
   }
 
   get precisaCartao(): boolean {
-    return this.formData.metodoPagamento === MetodoPagamento.CartaoCredito ||
-           this.formData.metodoPagamento === MetodoPagamento.CartaoDebito;
+    return this.formData.metodoPagamento === this.METODO_CARTAO;
   }
 
   get precisaTelefone(): boolean {
-    return this.formData.metodoPagamento === MetodoPagamento.Express ||
-           this.formData.metodoPagamento === MetodoPagamento.Multicaixa;
+    return this.formData.metodoPagamento === this.METODO_PIX;
+  }
+
+  get precisaBoleto(): boolean {
+    return this.formData.metodoPagamento === this.METODO_BOLETO;
+  }
+
+  get precisaTransferencia(): boolean {
+    return this.formData.metodoPagamento === this.METODO_TRANSFERENCIA;
   }
 
   formatarCartao(event: any): void {
@@ -123,7 +136,7 @@ export class CheckoutComponent implements OnInit {
       return false;
     }
 
-   /* if (this.precisaCartao) {
+    if (this.precisaCartao) {
       if (!this.formData.numeroCartao || 
           !this.formData.nomeCartao || 
           !this.formData.validadeCartao || 
@@ -141,7 +154,7 @@ export class CheckoutComponent implements OnInit {
         this.errorMessage = 'CVV inválido';
         return false;
       }
-    }*/
+    }
 
     if (this.precisaTelefone && !this.formData.telefone) {
       this.errorMessage = 'Informe o número de telefone';
@@ -157,28 +170,42 @@ export class CheckoutComponent implements OnInit {
       return;
     }
 
-    const pagamentoDto: ProcessarPagamentoDto = {
+    if (!this.reserva) {
+      this.errorMessage = 'Dados da reserva não carregados';
+      this.showErrorModal = true;
+      return;
+    }
+
+    const pagamentoDto: CriarPagamentoDto = {
       reservaId: this.reservaId,
-      metodoPagamento: this.formData.metodoPagamento as MetodoPagamento
+      metodoPagamento: this.formData.metodoPagamento,
+      valor: this.calcularTotal()
     };
 
     this.processando = true;
 
     this.pagamentoService.processarPagamento(pagamentoDto).subscribe({
-      next: (pagamento: any) => {
-        console.log('✅ Pagamento processado:', pagamento);
+      next: (resultado: ResultadoPagamentoDto) => {
+        console.log('✅ Resposta do pagamento:', resultado);
         this.processando = false;
-        this.showSuccessModal = true;
 
-        // Redireciona após 3 segundos
-        setTimeout(() => {
-          this.showSuccessModal = false;
-          this.router.navigate(['/minhas-reservas']);
-        }, 3000);
+        if (resultado.sucesso && resultado.pagamento) {
+          this.codigoTransacao = resultado.pagamento.codigoTransacao;
+          this.showSuccessModal = true;
+
+          // Redireciona após 3 segundos
+          setTimeout(() => {
+            this.showSuccessModal = false;
+            this.router.navigate(['/minhas-reservas']);
+          }, 3000);
+        } else {
+          this.errorMessage = resultado.mensagem || 'Pagamento não aprovado';
+          this.showErrorModal = true;
+        }
       },
       error: (err: any) => {
         console.error('❌ Erro ao processar pagamento:', err);
-        this.errorMessage = err.error?.message || 'Erro ao processar pagamento. Tente novamente.';
+        this.errorMessage = err.error?.mensagem || 'Erro ao processar pagamento. Tente novamente.';
         this.showErrorModal = true;
         this.processando = false;
       }

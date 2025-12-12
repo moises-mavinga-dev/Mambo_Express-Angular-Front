@@ -1,121 +1,116 @@
 <div class="reserva-container">
-    <!-- Success Toast -->
     <div class="success-toast" [class.show]="showSuccessToast">
-        ✓ Reserva criada com sucesso!
+        ✓ Reserva criada com sucesso! Redirecionando...
     </div>
 
-    <!-- Header -->
     <div class="header">
+        <button class="btn-back" (click)="router.navigate(['/pacotes'])">← Voltar</button>
         <h1>Fazer Reserva</h1>
-        <p>Preencha os dados abaixo para confirmar sua viagem</p>
+        <p>Olá, <strong>{{ nomeUsuario }}</strong>! Preencha os dados para sua viagem</p>
     </div>
 
-    <!-- Loading -->
     <div *ngIf="loadingData" class="loading-overlay">
         <div class="spinner"></div>
         <p>Carregando dados...</p>
     </div>
 
-    <!-- Form Container -->
     <div class="form-container" *ngIf="!loadingData">
-        <!-- Row 1: Nome e Email -->
-        <div class="form-row two-cols">
-            <div class="form-group">
-                <label>Nome Completo</label>
-                <div class="input-wrapper">
-                    <span class="input-icon icon-user"></span>
-                    <input type="text" class="form-input" placeholder="Digite seu nome" [(ngModel)]="formData.nomeUsuario" name="nomeUsuario">
-                </div>
-            </div>
 
+        <!-- Selecionar Destino -->
+        <div class="form-row">
             <div class="form-group">
-                <label>Email</label>
+                <label>Destino *</label>
                 <div class="input-wrapper">
-                    <span class="input-icon icon-mail"></span>
-                    <input type="email" class="form-input" placeholder="seu@email.com" [(ngModel)]="formData.email" name="email" required>
+                    <span class="input-icon">📍</span>
+                    <select class="form-select" [(ngModel)]="formData.destinoId" (change)="onDestinoChange()" name="destinoId" required>
+                        <option value="">Selecione um destino</option>
+                        <option *ngFor="let destino of destinos" [value]="destino.id">
+                            {{ destino.nomeCidade }}{{ destino.pais ? ' - ' + destino.pais : '' }}
+                        </option>
+                    </select>
                 </div>
             </div>
         </div>
 
-        <!-- Row 2: Telefone, Destino, Pacote -->
-        <div class="form-row three-cols">
+        <!-- Selecionar Pacote -->
+        <div class="form-row" *ngIf="formData.destinoId">
             <div class="form-group">
-                <label>Telefone</label>
+                <label>Pacote de Viagem *</label>
                 <div class="input-wrapper">
-                    <span class="input-icon icon-phone"></span>
-                    <input type="tel" class="form-input" placeholder="+244 923 456 789" [(ngModel)]="formData.telefone" name="telefone" required>
+                    <span class="input-icon">📦</span>
+                    <select class="form-select" [(ngModel)]="formData.pacoteId" (change)="onPacoteChange()" name="pacoteId" required>
+                        <option value="">Selecione um pacote</option>
+                        <option *ngFor="let pacote of pacotesFiltrados" [value]="pacote.id">
+                            {{ pacote.nomePacote }} - {{ pacote.preco | currency:'AOA' }}
+                        </option>
+                    </select>
+                </div>
+                <p class="hint" *ngIf="pacotesFiltrados.length === 0 && formData.destinoId">
+                    Nenhum pacote disponível para este destino
+                </p>
+            </div>
+        </div>
+
+        <!-- Detalhes do Pacote -->
+        <div class="pacote-detalhes" *ngIf="pacoteSelecionado">
+            <h3>Detalhes do Pacote</h3>
+            <div class="detalhes-grid">
+                <div class="detalhe-item">
+                    <span class="label">Destino:</span>
+                    <span class="value">{{ destinoSelecionado?.nomeCidade }}</span>
+                </div>
+                <div class="detalhe-item">
+                    <span class="label">Duração:</span>
+                    <span class="value">{{ pacoteSelecionado.duracao }} dias</span>
+                </div>
+                <div class="detalhe-item">
+                    <span class="label">Preço por pessoa:</span>
+                    <span class="value">{{ pacoteSelecionado.preco | currency:'AOA' }}</span>
+                </div>
+            </div>
+            <p class="descricao">{{ pacoteSelecionado.descricao }}</p>
+        </div>
+
+        <!-- Data e Quantidade -->
+        <div class="form-row two-cols" *ngIf="pacoteSelecionado">
+            <div class="form-group">
+                <label>Data da Viagem *</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">📅</span>
+                    <input type="date" class="form-input" [(ngModel)]="formData.dataViagem" name="dataViagem" [min]="dataMinima" required>
                 </div>
             </div>
 
             <div class="form-group">
-                <label>Destino</label>
+                <label>Número de Pessoas *</label>
                 <div class="input-wrapper">
-                    <span class="input-icon icon-map"></span>
-                    <select class="form-select" [(ngModel)]="formData.destinoId" name="destinoId" required>
-            <option value="">Selecione</option>
-            <option *ngFor="let destino of destinos" [value]="destino.id">
-              {{ destino.nomeCidade }}
-            </option>
-          </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Pacote</label>
-                <div class="input-wrapper">
-                    <span class="input-icon icon-package"></span>
-                    <select class="form-select" [(ngModel)]="formData.nomePacote" name="nomePacote" required>
-            <option value="">Selecione</option>
-            <option *ngFor="let pacote of pacotes" [value]="pacote.nomePacote">
-              {{ pacote.nomePacote }}
-            </option>
-          </select>
+                    <span class="input-icon">👥</span>
+                    <input type="number" class="form-input" [(ngModel)]="formData.quantidadePessoas" name="quantidadePessoas" min="1" max="20" required>
                 </div>
             </div>
         </div>
 
-        <!-- Row 3: Datas e Pessoas -->
-        <div class="form-row three-cols">
-            <div class="form-group">
-                <label>Data de Reserva</label>
-                <div class="input-wrapper">
-                    <span class="input-icon icon-calendar"></span>
-                    <input type="date" class="form-input" [(ngModel)]="formData.dataReserva" (change)="onDataInicioChange()" name="dataReserva" [min]="dataMinima" required>
+        <!-- Resumo do Valor -->
+        <div class="resumo-valor" *ngIf="pacoteSelecionado">
+            <h3>Resumo do Valor</h3>
+            <div class="valor-detalhes">
+                <div class="valor-linha">
+                    <span>{{ formData.quantidadePessoas }} pessoa(s)</span>
+                    <span>{{ pacoteSelecionado.preco | currency:'AOA' }} cada</span>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label>Data da Viagem</label>
-                <div class="input-wrapper">
-                    <span class="input-icon icon-calendar"></span>
-                    <input type="date" class="form-input" [(ngModel)]="formData.dataViagem" name="dataViagem" [min]=" formData.dataReserva " required>
-                </div>
-            </div>
-
-            <div class="form-group ">
-                <label>Nº de Pessoas</label>
-                <div class="input-wrapper ">
-                    <span class="input-icon icon-users "></span>
-                    <input type="number " class="form-input " [(ngModel)]="formData.quantidadePessoas " name="numeroPessoas " min="1 " max="20 " required>
+                <div class="valor-linha total">
+                    <span><strong>Total</strong></span>
+                    <span><strong>{{ calcularValorTotal() | currency:'AOA' }}</strong></span>
                 </div>
             </div>
         </div>
 
-        <!-- Observações -->
-        <div class="form-row ">
-            <div class="form-group ">
-                <label>Observações (Opcional)</label>
-                <div class="input-wrapper ">
-                    <span class="input-icon icon-text "></span>
-                    <textarea class="form-textarea " placeholder="Alguma preferência especial? " [(ngModel)]="formData.observacoes " name="observacoes "></textarea>
-                </div>
-            </div>
-        </div>
+        <!-- Botão -->
+        <button class="submit-btn" (click)="criarReserva()" [disabled]="loading || !pacoteSelecionado">
+            <span *ngIf="loading" class="loading-spinner"></span>
+            {{ loading ? 'Processando...' : 'Confirmar Reserva' }}
+        </button>
 
-        <!-- Submit Button -->
-        <button class="submit-btn " (click)="criarReserva() " [disabled]="loading ">
-      <span *ngIf="loading " class="loading-spinner "></span>
-      {{ loading ? 'Processando...' : 'Confirmar Reserva' }}
-    </button>
+        <p class="observacao">* Campos obrigatórios</p>
     </div>
 </div>
