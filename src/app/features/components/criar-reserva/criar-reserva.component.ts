@@ -230,7 +230,7 @@ export class CriarReservaComponent implements OnInit {
 
         setTimeout(() => {
           this.showSuccessToast = false;
-          this.router.navigate(['/checkout', reserva.id]);
+          this.router.navigate(['pagamento', reserva.id]);
         }, 2000);
       },
       error: (err: any) => {

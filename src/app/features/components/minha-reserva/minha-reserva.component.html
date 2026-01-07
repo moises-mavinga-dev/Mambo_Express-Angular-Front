@@ -90,9 +90,10 @@
             <button class="filter-tab" [class.active]="filtroStatus === 'pago'" (click)="mudarFiltro('pago')">
                 Pagas ({{ estatisticas.pagos }})
             </button>
-            <button class="filter-tab" [class.active]="filtroStatus === 'cancelado'" (click)="mudarFiltro('cancelando')">
-                Canceladas ({{ estatisticas.cancelados }})
+            <button class="filter-tab" [class.active]="filtroStatus === 'cancelado'" (click)="mudarFiltro('cancelado')">
+             Canceladas ({{ estatisticas.cancelados }})
             </button>
+
         </div>
 
         <div class="sort-container">
@@ -134,12 +135,12 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                             <circle cx="12" cy="10" r="3"/>
-                        </svg> {{ reserva.nomeDestino}}
+                        </svg> {{ reserva.nomeCidade}}
                     </p>
                 </div>
                 <div class="header-right">
-                    <span class="status-badge" [ngClass]="getStatusClass(reserva.StatuReserva)">
-                        {{ getStatusIcon(reserva.StatuReserva) }} {{ reserva.StatuReserva }}
+                    <span class="status-badge" [ngClass]="getStatusClass(reserva.statuReserva)">
+                        {{ getStatusIcon(reserva.statuReserva) }} {{ reserva.statuReserva }}
                     </span>
                 </div>
             </div>
@@ -198,7 +199,7 @@
 
                         <button *ngIf="podeCancelar(reserva)" class="btn-danger btn-sm" (click)="abrirModalCancelar(reserva)">
                         ✗ Cancelar
-                    </button>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -236,7 +237,7 @@
             <div class="modal-body">
                 <div *ngIf="reservaSelecionada" class="reserva-info">
                     <p><strong>Pacote:</strong> {{ reservaSelecionada.nomePacote }}</p>
-                    <p><strong>Destino:</strong> {{ reservaSelecionada.nomeDestino }}</p>
+                    <p><strong>Destino:</strong> {{ reservaSelecionada.nomeCidade }}</p>
                     <p><strong>Data da Viagem:</strong> {{ formatarDataCompleta(reservaSelecionada.dataViagem) }}</p>
                 </div>
 

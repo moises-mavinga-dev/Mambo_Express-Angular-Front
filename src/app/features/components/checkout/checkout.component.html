@@ -36,7 +36,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="checkout-content" *ngIf="!loadingReserva && reserva">
+    <div class="checkout-content" *ngIf="!loadingReserva && reservas">
         <!-- Left Column: Payment Form -->
         <div class="payment-section">
             <div class="section-card">
@@ -127,9 +127,9 @@
                 <div class="package-summary">
 
                     <div class="package-info">
-                        <h3>{{ reserva.pacote.nomePacote }}</h3>
+                        <h3>{{ reservas.pacote.nomePacote }}</h3>
                         <p class="destination">
-                            📍 {{ reserva.destino.descricao}}
+                            📍 {{ reservas.destino}}
                         </p>
                     </div>
                 </div>
@@ -138,13 +138,13 @@
                 <div class="reservation-details">
                     <div class="detail-row">
                         <span class="label">Data da Viagem:</span>
-                        <span class="value">{{ reserva.dataViagem | date:'dd/MM/yyyy' }}</span>
+                        <span class="value">{{ reservas.dataViagem | date:'dd/MM/yyyy' }}</span>
                     </div>
 
                     <div class="detail-row">
                         <span class="label">Status:</span>
-                        <span class="badge" [class]="'badge-' + reserva.status.toString">
-              {{ reserva.status }}
+                        <span class="badge" [class]="'badge-' + reservas.statuReserva.toString">
+              {{ reservas.statuReserva }}
             </span>
                     </div>
                 </div>
@@ -155,7 +155,7 @@
 
                     <div class="price-row">
                         <span>Pacote</span>
-                        <span>{{ reserva.pacote.preco | currency:'AOA' }}</span>
+                        <span>{{ reservas.pacote.preco | currency:'AOA' }}</span>
                     </div>
 
                     <div class="price-row">

@@ -1,4 +1,5 @@
 
+import { ReservaDto } from '../../models/reserva-model/reserva.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -21,7 +22,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckoutComponent implements OnInit {
   reservaId: string = '';
-  reserva: Reserva | null = null;
+ // reservas: Reserva | null = null;
+ reservas: ReservaDto | null = null;
   
   // Form Data
   formData = {
@@ -76,19 +78,21 @@ export class CheckoutComponent implements OnInit {
 
   carregarReserva(): void {
     this.loadingReserva = true;
-    
+  
+
     this.reservaService.obterReserva(this.reservaId).subscribe({
-      next: (reserva: Reserva) => {
-        this.reserva = reserva;
-        this.loadingReserva = false;
-      },
-      error: (err: any) => {
-        console.error('Erro ao carregar reserva:', err);
-        alert('Reserva não encontrada');
-        this.loadingReserva = false;
-        this.router.navigate(['/']);
-      }
-    });
+  next: (reserva: ReservaDto) => {  
+    this.reservas = reserva;
+    this.loadingReserva = false;
+  },
+  error: (err: any) => {
+    console.error('Erro ao carregar reserva:', err);
+    this.loadingReserva = false;
+     alert('Reserva não encontrada');
+    this.router.navigate(['/']);
+  }
+});
+
   }
 
   get metodoSelecionado() {
@@ -170,7 +174,7 @@ export class CheckoutComponent implements OnInit {
       return;
     }
 
-    if (!this.reserva) {
+    if (!this.reservas) {
       this.errorMessage = 'Dados da reserva não carregados';
       this.showErrorModal = true;
       return;
@@ -217,8 +221,13 @@ export class CheckoutComponent implements OnInit {
     this.errorMessage = '';
   }
 
-  calcularTotal(): number {
-    if (!this.reserva || !this.reserva.pacote) return 0;
-    return this.reserva.pacote.preco;
-  }
+ /* calcularTotal(): number {
+    if (!this.reservas || !this.reservas.pacote) return 0;
+    return this.reservas.pacote.preco;
+  }*/
+ calcularTotal(): number {
+  return this.reservas?.valorTotal ?? 0;
 }
+
+}
+  

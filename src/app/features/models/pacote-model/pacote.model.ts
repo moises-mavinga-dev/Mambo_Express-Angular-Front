@@ -26,3 +26,10 @@ export interface AtualizarPacoteDto {
   duracao?: number;
   disponivel?: boolean;
 }
+
+export interface PacoteReservaDto {
+    id: string;
+    nomePacote?: string;
+    nomeCidade:string
+     preco: number; 
+}

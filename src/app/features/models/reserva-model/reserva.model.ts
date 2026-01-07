@@ -1,6 +1,6 @@
 
 import { Destino } from "../destno-model/destino.model";
-import { Pacote } from "../pacote-model/pacote.model";
+import { Pacote, PacoteReservaDto } from "../pacote-model/pacote.model";
 import { Pagamento } from "../pagamento-model/pagamento.model";
 import { Usuario } from "../usuarios.model/usuario.model";
 
@@ -18,6 +18,26 @@ export interface Reserva {
   dataViagem: Date;
   status: StatuReserva;
   pagamento?: Pagamento;
+  
+}
+
+export interface ReservaDto {
+    id: string;                 // Guid → string
+  usuarioId: string;
+
+  pacoteId: string;
+  pacote: PacoteReservaDto;
+destino: Destino;
+
+  dataReserva: string;        // DateTime → string (ISO)
+  dataViagem: string;
+
+  quantidadePessoas: number;
+  valorTotal: number;
+
+  statuReserva: string;
+
+  pagamentoConfirmado: boolean;
   
 }
 export enum StatuReserva {
@@ -43,7 +63,7 @@ export interface ReservaResponseDto {
  // usuarioId?: string;
  id: string;
   nomeUsuario?: string;
-   nomeDestino: string;
+  nomeCidade: string;
   nomePacote?: string;
   quantidadePessoas:number;
   dataReserva: Date;
@@ -52,18 +72,19 @@ export interface ReservaResponseDto {
 
 export interface  MinhasReservasDto{
     id: string;
-   nomeDestino: string;
+   nomeCidade: string;
 // pais: string;
   nomePacote?: string;
 quantidadePessoas:number;
 valorTotal:number;
   dataReserva: Date;
   dataViagem: Date;
-   StatuReserva: StatuReserva;
+   statuReserva: StatuReserva;
   pagamentoConfirmado:boolean;
 }
 
 export interface AtualizarReservaDto {
   dataViagem?: Date;
-  status?: StatuReserva;
+  statuReserva: StatuReserva;
 }
+

@@ -77,17 +77,18 @@ export const routes: Routes = [
   
   // Checkout - Processar Pagamento
   {
-    path: 'checkout/:id',
-    loadComponent: () => import('./features/components/checkout/checkout.component').then(m => m.CheckoutComponent),
-    
-    //data: { title: 'Finalizar Pagamento' }
-  },
+  path: 'pagamento/:id',
+  loadComponent: () =>
+    import('./features/components/checkout/checkout.component')
+      .then(m => m.CheckoutComponent)
+},
+
  
- {
+ /*{
    path: 'checkout',
    loadComponent: () => import('./features/components/checkout/checkout.component').then(m => m.CheckoutComponent),
    
- },
+ },*/
  
    
 

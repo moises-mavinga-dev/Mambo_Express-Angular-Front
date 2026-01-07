@@ -1,10 +1,10 @@
- .main-layout {
-     min-height: 100vh;
-     display: flex;
-     flex-direction: column;
- }
- 
- .main-content {
-     flex: 1;
-     background: linear-gradient(135deg, #0a2e2e 0%, #1a4d4d 100%);
- }
+     .main-layout {
+         min-height: 100vh;
+         display: flex;
+         flex-direction: column;
+     }
+     
+     .main-content {
+         flex: 1;
+         /* background: linear-gradient(135deg, #0a2e2e 0%, #1a4d4d 100%);*/
+     }

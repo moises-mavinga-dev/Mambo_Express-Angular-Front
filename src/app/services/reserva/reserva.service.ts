@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
-import { CriarReservaDto, MinhasReservasDto, Reserva, ReservaResponseDto } from '../../features/models/reserva-model/reserva.model';
+import { CriarReservaDto, MinhasReservasDto, Reserva, ReservaDto, ReservaResponseDto } from '../../features/models/reserva-model/reserva.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +18,8 @@ export class ReservaService {
   }
 
   // Obter reserva por ID
-  obterReserva(id: string): Observable<Reserva> {
-    return this.http.get<Reserva>(`${this.apiUrl}/${id}`);
+  obterReserva(id: string): Observable<ReservaDto> {
+    return this.http.get<ReservaDto>(`${this.apiUrl}/${id}`);
   }
 
   // Minhas reservas
@@ -40,4 +40,8 @@ export class ReservaService {
   todasReservas(): Observable<Reserva[]> {
     return this.http.get<Reserva[]>(this.apiUrl);
   }
+
+
+
+  
 }

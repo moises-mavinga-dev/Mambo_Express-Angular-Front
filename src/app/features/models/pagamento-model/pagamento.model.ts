@@ -25,7 +25,7 @@ export interface PagamentoComReservaDto {
 
 export interface ReservaResumida {
   id: string;
-  cliente?: string;
+nomeUsuario: string;  
   dataReserva: Date;
 }
 
@@ -60,14 +60,14 @@ export interface AtualizarStatusDto {
 
 // Enum de Status (corresponde ao backend)
 export enum StatuPagamento {
-  Pendente = 0,
-  Processando = 1,
-  Aprovado = 2,
-  Recusado = 3,
-  Cancelado = 4,
-  Estornado = 5,
-  Expirado = 6,
-  AguardandoConfirmacao = 7
+  Pendente ,
+  Processando ,
+  Aprovado ,
+  Recusado ,
+  Cancelado ,
+  Estornado ,
+  Expirado ,
+  AguardandoConfirmacao 
 }
 
 // Métodos de pagamento aceitos pela API

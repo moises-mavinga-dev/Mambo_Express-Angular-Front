@@ -5,6 +5,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { PagamentoService } from '../../../services/pagamento/pagamento.service';
 
 @Component({
   selector: 'app-minha-reserva',
@@ -45,7 +46,8 @@ export class MinhaReservaComponent {
   constructor(
     private reservaService: ReservaService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private pagamentoServico:PagamentoService
   ) {}
 
   ngOnInit(): void {
@@ -85,11 +87,11 @@ export class MinhaReservaComponent {
   calcularEstatisticas(): void {
     this.estatisticas = {
       total: this.reservas.length,
-      pendentes: this.reservas.filter(r => r.StatuReserva === StatuReserva.Pendente).length,
-      confirmados: this.reservas.filter(r => r.StatuReserva === StatuReserva.Confirmado).length,
-      pagos: this.reservas.filter(r => r.StatuReserva === StatuReserva.Pago).length,
-      cancelados: this.reservas.filter(r => r.StatuReserva === StatuReserva.Cancelado).length,
-      concluidas: this.reservas.filter(r => r.StatuReserva === StatuReserva.Concluida).length
+      pendentes: this.reservas.filter(r => r.statuReserva === StatuReserva.Pendente).length,
+      confirmados: this.reservas.filter(r => r.statuReserva === StatuReserva.Confirmado).length,
+      pagos: this.reservas.filter(r => r.statuReserva === StatuReserva.Pago).length,
+      cancelados: this.reservas.filter(r => r.statuReserva === StatuReserva.Cancelado).length,
+      concluidas: this.reservas.filter(r => r.statuReserva === StatuReserva.Concluida).length
     };
   }
 
@@ -102,7 +104,7 @@ export class MinhaReservaComponent {
     // 🔧 CORREÇÃO: Comparação correta de status
     if (this.filtroStatus !== 'todas') {
       resultado = resultado.filter(r => {
-        const statusReserva = r.StatuReserva.toString().toLowerCase();
+        const statusReserva = r.statuReserva.toString().toLowerCase();
         const filtroAtual = this.filtroStatus.toLowerCase();
         return statusReserva === filtroAtual;
       });
@@ -187,7 +189,7 @@ export class MinhaReservaComponent {
       next: () => {
         this.mostrarSucesso('Reserva cancelada com sucesso!');
         this.fecharModalCancelar();
-        this.cancelando = false;
+       // this.cancelando = false;
         this.carregarReservas();
       },
       error: (erro) => {
@@ -210,15 +212,15 @@ export class MinhaReservaComponent {
     const hoje = new Date();
     const dataViagem = new Date(reserva.dataViagem);
     
-    return statusPermitidos.includes(reserva.StatuReserva) && dataViagem > hoje;
+    return statusPermitidos.includes(reserva.statuReserva) && dataViagem > hoje;
   }
 
   /**
    * ✅ VERIFICAR SE PODE PAGAR
    */
   podePagar(reserva: MinhasReservasDto): boolean {
-    return reserva.StatuReserva === StatuReserva.Pendente || 
-           reserva.StatuReserva === StatuReserva.Confirmado;
+    return reserva.statuReserva === StatuReserva.Pendente || 
+           reserva.statuReserva === StatuReserva.Confirmado;
            
   }
 
@@ -226,7 +228,7 @@ export class MinhaReservaComponent {
    * ✅ IR PARA PAGAMENTO
    */
   irParaPagamento(reserva: MinhasReservasDto): void {
-    this.router.navigate(['minhas-reservas', reserva.id]);
+    this.router.navigate(['/pagamento', reserva.id]);
   }
 
   /**
@@ -261,7 +263,7 @@ export class MinhaReservaComponent {
       [StatuReserva.Cancelado]: '✗',
       [StatuReserva.Concluida]: '✓'
     };
-    return icons[status] || '⏳';
+    return icons[status] || '.';
   }
 
   /**
