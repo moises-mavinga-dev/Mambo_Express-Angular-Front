@@ -3,7 +3,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 1.5rem 5%;
-        background: rgba(15, 47, 47, 0.95);
+        background: linear-gradient(135deg, #063cece0 0%, #0f25e9bd 100%);
         backdrop-filter: blur(10px);
         position: sticky;
         top: 0;
@@ -21,7 +21,7 @@
     .logo-icon {
         width: 45px;
         height: 45px;
-        background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+        background: linear-gradient(135deg, #4a7ede 0%, #1882be 100%);
         border-radius: 50%;
         position: relative;
     }
@@ -39,7 +39,7 @@
     .logo-text {
         font-size: 1.3rem;
         font-weight: 700;
-        color: white;
+        color: rgb(253, 252, 252);
     }
     
     .nav-menu {
@@ -49,7 +49,7 @@
     }
     
     .nav-link {
-        color: #94a3b8;
+        color: #eaedf1;
         text-decoration: none;
         font-size: 1rem;
         transition: color 0.3s;
@@ -59,7 +59,7 @@
     
     .nav-link:hover,
     .nav-link.active {
-        color: #4ade80;
+        color: #195ef3d7;
     }
     
     .nav-link.active::after {
@@ -69,7 +69,7 @@
         left: 0;
         width: 100%;
         height: 2px;
-        background: #4ade80;
+        background: #2b69c7be;
     }
     
     .nav-actions {
@@ -96,18 +96,18 @@
     }
     
     .btn-login:hover {
-        border-color: #4ade80;
-        background: rgba(74, 222, 128, 0.1);
+        border-color: #3568f3;
+        background: rgba(74, 138, 222, 0.1);
     }
     
     .btn-signup {
-        background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
-        color: #0f2f2f;
+        background: linear-gradient(135deg, #477bda 0%, #1829be 100%);
+        color: #0f1d2f;
     }
     
     .btn-signup:hover {
         transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(74, 222, 128, 0.3);
+        box-shadow: 0 5px 15px rgba(34, 104, 233, 0.3);
     }
     
     .user-menu {
@@ -118,8 +118,8 @@
         width: 45px;
         height: 45px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
-        color: #0f2f2f;
+        background: linear-gradient(135deg, #4a7ede 0%, #1882be 100%);
+        color: #0a101f;
         border: none;
         font-weight: 700;
         font-size: 1rem;
@@ -129,15 +129,15 @@
     
     .user-avatar:hover {
         transform: scale(1.1);
-        box-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
+        box-shadow: 0 0 20px rgba(41, 92, 187, 0.5);
     }
     
     .dropdown-menu {
         position: absolute;
         top: calc(100% + 1rem);
         right: 0;
-        background: rgba(15, 47, 47, 0.98);
-        border: 2px solid rgba(74, 222, 128, 0.3);
+        background: rgba(15, 29, 47, 0.98);
+        border: 2px solid rgba(63, 102, 230, 0.3);
         border-radius: 15px;
         padding: 1rem;
         min-width: 250px;
@@ -193,8 +193,8 @@
     }
     
     .menu-item:hover {
-        background: rgba(74, 222, 128, 0.1);
-        color: #4ade80;
+        background: rgba(74, 109, 222, 0.1);
+        color: #4a7ede;
     }
     
     .menu-item svg {

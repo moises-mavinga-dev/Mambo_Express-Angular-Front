@@ -204,7 +204,7 @@
                         border-radius: 20px;
                         padding: 1rem;
                         backdrop-filter: blur(10px);
-                        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.699);
                     }
                     
                     .section-card h2 {
@@ -228,8 +228,8 @@
                     }
                     
                     .payment-method {
-                        background: rgba(255, 255, 255, 0.03);
-                        border: 2px solid rgba(255, 255, 255, 0.1);
+                        background: rgba(247, 247, 247, 0.87);
+                        border: 2px solid rgba(202, 227, 253, 0.877);
                         border-radius: 12px;
                         padding: 0.2rem 0.2rem;
                         display: flex;
@@ -241,8 +241,8 @@
                     }
                     
                     .payment-method:hover {
-                        background: rgba(255, 255, 255, 0.08);
-                        border-color: rgba(74, 175, 222, 0.432);
+                        background: rgba(255, 255, 255, 0.863);
+                        border-color: rgba(74, 175, 222, 0.822);
                     }
                     
                     .payment-method.selected {
@@ -263,7 +263,7 @@
                     .radio-check {
                         width: 15px;
                         height: 15px;
-                        border: 2px solid rgba(255, 255, 255, 0.3);
+                        border: 2px solid rgba(71, 143, 236, 0.644);
                         border-radius: 50%;
                         position: relative;
                     }
@@ -299,10 +299,10 @@
                     .form-input {
                         width: 100%;
                         padding: 0.3rem 0.01rem;
-                        background: rgba(255, 255, 255, 0.05);
-                        border: 2px solid rgba(255, 255, 255, 0.1);
+                        background: rgba(248, 248, 248, 0.05);
+                        border: 2px solid rgba(184, 188, 228, 0.726);
                         border-radius: 10px;
-                        color: white;
+                        color: rgb(29, 25, 25);
                         font-size: 1rem;
                         outline: none;
                         transition: all 0.3s ease;
@@ -323,8 +323,8 @@
                     }
                     
                     .info-box {
-                        background: rgba(59, 130, 246, 0.1);
-                        border: 1px solid rgba(60, 129, 240, 0.644);
+                        background: rgba(213, 215, 219, 0.1);
+                        border: 1px solid rgba(60, 129, 240, 0.281);
                         border-radius: 10px;
                         padding: 0.5rem;
                         margin-top: 1rem;
@@ -355,7 +355,7 @@
                         display: flex;
                         justify-content: space-between;
                         padding: 0.75rem 0;
-                        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                        border-bottom: 1px solid rgba(96, 136, 211, 0.623);
                     }
                     
                     .info-row:last-child {

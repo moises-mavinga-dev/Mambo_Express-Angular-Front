@@ -21,13 +21,13 @@
         font-weight: 700;
         line-height: 1.2;
         margin-bottom: 1.5rem;
-        color: #4ade80;
+        color: #567adf;
     }
     
     .highlight {
-        color: #4ade80;
+        color: #567adf;
         display: block;
-        background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+        background: linear-gradient(135deg, #4a97de 0%, #225bc5 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -36,7 +36,7 @@
     .hero-description {
         font-size: 1.5rem;
         line-height: 1.8;
-        color: #4ade80;
+        color: #567adf;
         margin-bottom: 2.5rem;
         max-width: 90%;
     }
@@ -57,24 +57,24 @@
     }
     
     .btn-primary {
-        background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
-        color: #0f2f2f;
+        background: linear-gradient(135deg, #4a97de 0%, #225bc5 100%);
+        color: #0f1f2f;
     }
     
     .btn-primary:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 30px rgba(74, 222, 128, 0.3);
+        box-shadow: 0 10px 30px rgba(74, 143, 222, 0.3);
     }
     
     .btn-secondary {
         background: transparent;
-        color: #0f2f2f;
-        border: 2px solid rgba(19, 131, 15, 0.623);
+        color: #1a3358;
+        border: 2px solid rgba(15, 56, 131, 0.692);
     }
     
     .btn-secondary:hover {
-        border-color: #4ade80;
-        background: rgba(53, 180, 100, 0.322);
+        border-color: #498be2;
+        background: rgba(52, 86, 235, 0.39);
     }
     
     .image-content {
@@ -101,7 +101,7 @@
         position: absolute;
         top: 20px;
         right: -30px;
-        background: rgba(15, 47, 47, 0.95);
+        background: rgba(15, 29, 47, 0.95);
         backdrop-filter: blur(10px);
         padding: 0.75rem 1.25rem;
         border-radius: 50px;
@@ -115,15 +115,15 @@
     .badge-icon {
         width: 20px;
         height: 20px;
-        fill: #4ade80;
-        stroke: #4ade80;
+        fill: #4a8ade;
+        stroke: #4a8ade;
     }
     
     .info-card {
         position: absolute;
         bottom: 40px;
         left: -50px;
-        background: rgba(15, 47, 47, 0.95);
+        background: rgba(15, 23, 47, 0.95);
         backdrop-filter: blur(10px);
         padding: 1.25rem 1.5rem;
         border-radius: 15px;
@@ -137,7 +137,7 @@
     .info-icon {
         width: 24px;
         height: 24px;
-        stroke: #4ade80;
+        stroke: #4a8ade;
         stroke-width: 2;
         flex-shrink: 0;
         margin-top: 2px;
@@ -156,7 +156,7 @@
         transform: translate(-50%, -50%);
         width: 500px;
         height: 500px;
-        background: radial-gradient(circle, rgba(74, 222, 128, 0.1) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(74, 96, 222, 0.1) 0%, transparent 70%);
         border-radius: 50%;
         z-index: 0;
     }

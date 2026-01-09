@@ -8,9 +8,8 @@
      }
      
      .login-card {
-         background: linear-gradient(135deg, #0a2e2e 0%, #1a4d4d 100%);
          backdrop-filter: blur(10px);
-         border: 2px solid rgba(74, 222, 128, 0.3);
+         border: 2px solid rgba(255, 255, 255, 0.3);
          border-radius: 20px;
          padding: 3rem;
          max-width: 350px;
@@ -26,11 +25,11 @@
      .logo-icon {
          font-size: 2em;
          margin-bottom: 1rem;
-         filter: drop-shadow(0 0 20px rgba(74, 222, 128, 0.5));
+         filter: drop-shadow(0 0 20px rgba(71, 100, 228, 0.5));
      }
      
      .logo-section h1 {
-         color: #4ade80;
+         color: #4a85de;
          font-size: 1.5rem;
          font-weight: 400;
          margin-bottom: 0.5rem;
@@ -67,7 +66,7 @@
      
      .form-group label {
          display: block;
-         color: #4ade80;
+         color: #4a85de;
          font-weight: 2;
          margin-bottom: 0.5rem;
      }
@@ -75,22 +74,22 @@
      .form-input {
          width: 100%;
          padding: 0.5rem;
-         background: rgba(255, 255, 255, 0.05);
+         background: rgba(14, 11, 11, 0.05);
          border: 2px solid rgba(255, 255, 255, 0.1);
          border-radius: 10px;
-         color: white;
+         color: rgb(68, 63, 63);
          font-size: 1rem;
          transition: all 0.3s ease;
      }
      
      .form-input:focus {
          outline: none;
-         border-color: #4ade80;
-         background: rgba(255, 255, 255, 0.08);
+         border-color: #dfe6f0;
+         background: rgb(240, 236, 236);
      }
      
      .form-input::placeholder {
-         color: #64748b;
+         color: #32363d;
      }
      
      .input-error {
@@ -108,7 +107,7 @@
          transform: translateY(-50%);
          background: none;
          border: none;
-         color: #94a3b8;
+         color: #393b3f;
          cursor: pointer;
          font-size: 1rem;
          padding: 0;
@@ -134,7 +133,7 @@
      }
      
      .link-text {
-         color: #4ade80;
+         color: #4a85de;
          text-decoration: none;
          font-size: 0.9rem;
      }
@@ -146,8 +145,8 @@
      .btn-login {
          width: 100%;
          padding: 0.5rem;
-         background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
-         color: #0f2f2f;
+         background: linear-gradient(135deg, #4a8ade 0%, #2269c5 100%);
+         color: #0f232f;
          border: none;
          border-radius: 10px;
          font-size: 1.1rem;
@@ -158,7 +157,7 @@
      
      .btn-login:hover:not(:disabled) {
          transform: translateY(-2px);
-         box-shadow: 0 10px 30px rgba(74, 222, 128, 0.4);
+         box-shadow: 0 10px 30px rgba(74, 121, 222, 0.4);
      }
      
      .btn-login:disabled {
@@ -178,7 +177,7 @@
      }
      
      .link-register {
-         color: #4ade80;
+         color: #4a85de;
          text-decoration: none;
          font-weight: 200;
          font-size: 1rem;

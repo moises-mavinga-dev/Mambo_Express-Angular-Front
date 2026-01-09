@@ -3,20 +3,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #0a2e2e 0%, #1a4d4d 100%);
     padding: 1rem;
 }
 
 .registro-card {
-    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
-    border: 2px solid rgba(74, 222, 128, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 20px;
     padding: 3rem;
     max-width: 350px;
-    width: 100%;
-    margin-top: 3px;
-    margin-block: 3px;
+    width: 40%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
 .header {
@@ -25,7 +22,7 @@
 }
 
 .header h1 {
-    color: #4ade80;
+    color: #4a85de;
     font-size: 1.5rem;
     font-weight: 100;
     margin-bottom: 1.5rem;
@@ -33,7 +30,7 @@
 }
 
 .header p {
-    color: #94a3b8;
+    color: #23262b;
 }
 
 .error-alert {
@@ -51,7 +48,7 @@
 
 .form-group label {
     display: block;
-    color: #4ade80;
+    color: #4a85de;
     font-weight: 100;
     margin-bottom: 0.2rem;
 }
@@ -60,17 +57,17 @@
 .form-select {
     width: 100%;
     padding: 0.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: rgba(244, 247, 247, 0.438);
+    border: 2px solid rgba(234, 239, 240, 0.644);
     border-radius: 10px;
-    color: white;
+    color: rgb(27, 24, 24);
     font-size: 1rem;
 }
 
 .form-input:focus,
 .form-select:focus {
     outline: none;
-    border-color: #4ade80;
+    border-color: #4a85de;
 }
 
 .hint {
@@ -98,12 +95,12 @@
 .terms-checkbox label {
     display: flex;
     gap: 0.75rem;
-    color: #94a3b8;
+    color: #43484e;
     cursor: pointer;
 }
 
 .terms-checkbox .link {
-    color: #4ade80;
+    color: #2c48c7;
     text-decoration: none;
 }
 
@@ -114,8 +111,8 @@
 .btn-registro {
     width: 100%;
     padding: 0.5rem;
-    background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
-    color: #0f2f2f;
+    background: linear-gradient(135deg, #4a8ade 0%, #225bc5 100%);
+    color: #0f1d2f;
     border: none;
     border-radius: 10px;
     font-size: 1rem;
@@ -126,7 +123,7 @@
 
 .btn-registro:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(74, 222, 128, 0.4);
+    box-shadow: 0 10px 30px rgba(46, 94, 226, 0.4);
 }
 
 .btn-registro:disabled {
@@ -142,12 +139,12 @@
 }
 
 .login-link p {
-    color: #94a3b8;
+    color: #333941;
     margin-bottom: 0rem;
 }
 
 .link-login {
-    color: #4ade80;
+    color: #4a85de;
     text-decoration: none;
     font-weight: 100;
     font-size: 1.1rem;
