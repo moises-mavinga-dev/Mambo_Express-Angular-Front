@@ -54,6 +54,10 @@
                 <!-- Card Details -->
                 <div class="card-details" *ngIf="precisaCartao && formData.metodoPagamento">
                     <h3>Dados do Cartão</h3>
+                    <label>Nome no Cartão</label>
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="NOME COMPLETO" [(ngModel)]="formData.nomeCartao" style="text-transform: uppercase" required>
+                    </div>
 
                 </div>
 

@@ -11,7 +11,7 @@ mat-card-header h1 {
     font-size: 1.8rem;
     font-weight: 600;
     text-align: center;
-    color: #0a2e13;
+    color: #4979c0;
     width: 100%;
     margin-bottom: 10px;
 }
@@ -23,7 +23,7 @@ mat-card-header h1 {
 }
 
 .mat-mdc-header-row {
-    background-color: #0f2f2f;
+    background-color: #3a6bc7;
     color: white;
     font-weight: bold;
 }

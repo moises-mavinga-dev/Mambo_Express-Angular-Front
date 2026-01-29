@@ -252,10 +252,10 @@
             </div>
 
             <div class="modal-footer">
-                <button class="btn-secondary" (click)="fecharModalCancelar()" [disabled]="cancelando">
+                <button class="btn-secondary   btn-sm" (click)="fecharModalCancelar()" [disabled]="cancelando">
                 Voltar
             </button>
-                <button class="btn-danger" (click)="confirmarCancelamento()" [disabled]="cancelando || !motivoCancelamento.trim()">
+                <button class="btn-danger  btn-sm" (click)="confirmarCancelamento()" [disabled]="cancelando || !motivoCancelamento.trim()">
                 {{ cancelando ? 'Cancelando...' : 'Confirmar Cancelamento' }}
             </button>
             </div>

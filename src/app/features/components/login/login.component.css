@@ -3,18 +3,19 @@
          display: flex;
          align-items: center;
          justify-content: center;
-         /* background: linear-gradient(135deg, #0a2e2e 0%, #1a4d4d 100%);*/
+         background: linear-gradient(135deg, #244bb4 0%, #1a3172 100%);
          padding: 5rem;
      }
      
      .login-card {
          backdrop-filter: blur(10px);
-         border: 2px solid rgba(255, 255, 255, 0.3);
+         border: 2px solid rgba(255, 255, 255, 0.397);
          border-radius: 20px;
          padding: 3rem;
          max-width: 350px;
          width: 40%;
-         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.541);
+         background-color: white;
      }
      
      .logo-section {
@@ -29,7 +30,7 @@
      }
      
      .logo-section h1 {
-         color: #4a85de;
+         color: #3062ec;
          font-size: 1.5rem;
          font-weight: 400;
          margin-bottom: 0.5rem;
@@ -41,12 +42,12 @@
      }
      
      .error-alert {
-         background: rgba(239, 68, 68, 0.2);
-         border: 1px solid #ef4444;
+         background: rgba(238, 40, 40, 0.404);
+         border: 1px solid #ef4444a6;
          border-radius: 10px;
          padding: 1rem;
          margin-bottom: 1.5rem;
-         color: #fecaca;
+         color: white;
          display: flex;
          align-items: center;
          gap: 0.75rem;
@@ -66,7 +67,7 @@
      
      .form-group label {
          display: block;
-         color: #4a85de;
+         color: #3062ec;
          font-weight: 2;
          margin-bottom: 0.5rem;
      }
@@ -133,7 +134,7 @@
      }
      
      .link-text {
-         color: #4a85de;
+         color: #3062ec;
          text-decoration: none;
          font-size: 0.9rem;
      }
@@ -146,7 +147,7 @@
          width: 100%;
          padding: 0.5rem;
          background: linear-gradient(135deg, #4a8ade 0%, #2269c5 100%);
-         color: #0f232f;
+         color: #e8ecee;
          border: none;
          border-radius: 10px;
          font-size: 1.1rem;
@@ -177,7 +178,7 @@
      }
      
      .link-register {
-         color: #4a85de;
+         color: #3062ec;
          text-decoration: none;
          font-weight: 200;
          font-size: 1rem;

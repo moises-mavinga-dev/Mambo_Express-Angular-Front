@@ -42,16 +42,7 @@ export const routes: Routes = [
         loadComponent: () => import('./features/components/pacotes/pacote-card/pacote-card.component')
           .then(m => m.PacoteCardComponent)
       },
-      {
-        path: 'registro',
-        loadComponent: () => import('./features/components/registro/registro.component')
-        .then(m => m.RegistroComponent)
-      },
-      {
-       path: 'login',
-        loadComponent: () => import('./features/components/login/login.component')
-        .then(m => m.LoginComponent)
-      },
+   
    
     {
       path: 'perfil',
@@ -72,6 +63,15 @@ export const routes: Routes = [
    loadComponent: () => import('./features/components/minha-reserva/minha-reserva.component')
      .then(m => m.MinhaReservaComponent)
  },
+
+  {
+  path: 'detalhe-reservas/:id',
+   
+  loadComponent: () => import('./features/components/reservas/reserva-detalhe/reserva-detalhe.component')
+    .then(m => m.ReservaDetalheComponent)
+},
+ 
+
  
   // ==================== ROTAS DE PAGAMENTO ====================
   
@@ -84,11 +84,6 @@ export const routes: Routes = [
 },
 
  
- /*{
-   path: 'checkout',
-   loadComponent: () => import('./features/components/checkout/checkout.component').then(m => m.CheckoutComponent),
-   
- },*/
  
    
 
@@ -99,18 +94,7 @@ export const routes: Routes = [
    }
   ]
 },
-     /* {
-        path: 'minhas-reservas',
-        canActivate: [authGuard],
-        loadComponent: () => import('./features/reservas/components/minhas-reservas/minhas-reservas.component')
-          .then(m => m.MinhasReservasComponent)
-      },*/
-    /*  {
-        path: 'reservas/:id',
-        canActivate: [authGuard],
-        loadComponent: () => import('./features/reservas/components/detalhe-reserva/detalhe-reserva.component')
-          .then(m => m.DetalheReservaComponent)
-      },*/
+    
 
 
 
@@ -135,5 +119,16 @@ export const routes: Routes = [
       }
     ]
   },
+
+     {
+        path: 'registro',
+        loadComponent: () => import('./features/components/registro/registro.component')
+        .then(m => m.RegistroComponent)
+      },
+      {
+       path: 'login',
+        loadComponent: () => import('./features/components/login/login.component')
+        .then(m => m.LoginComponent)
+      },
 
 ];

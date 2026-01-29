@@ -235,7 +235,7 @@ export class MinhaReservaComponent {
    * ✅ VER DETALHES DA RESERVA
    */
   verDetalhes(reserva: MinhasReservasDto): void {
-    this.router.navigate(['/meus-pagamentos']);
+    this.router.navigate(['/detalhe-reservas', reserva.id]);
   }
 
   /**

@@ -21,13 +21,13 @@
         font-weight: 700;
         line-height: 1.2;
         margin-bottom: 1.5rem;
-        color: #567adf;
+        color: #3062ec;
     }
     
     .highlight {
-        color: #567adf;
+        color: #3062ec;
         display: block;
-        background: linear-gradient(135deg, #4a97de 0%, #225bc5 100%);
+        background: linear-gradient(135deg, #3e57e7 0%, #225bc5 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -36,7 +36,7 @@
     .hero-description {
         font-size: 1.5rem;
         line-height: 1.8;
-        color: #567adf;
+        color: #3062ec;
         margin-bottom: 2.5rem;
         max-width: 90%;
     }

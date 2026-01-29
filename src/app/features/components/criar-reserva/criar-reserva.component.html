@@ -5,7 +5,7 @@
 
     <div class="header">
         <!--<button class="btn-back" (click)="router.navigate(['/pacotes'])">← Voltar</button>-->
-        <button class="btn-back" (click)="router.navigate(['/pacotescard'])">← Voltar</button>
+
         <h1>Fazer Reserva</h1>
         <p>Olá, <strong>{{ nomeUsuario }}</strong>! Preencha os dados para sua viagem</p>
     </div>
@@ -96,7 +96,7 @@
             <h3>Resumo do Valor</h3>
             <div class="valor-detalhes">
                 <div class="valor-linha">
-                    <span>{{ formData.quantidadePessoas }} pessoa(s)</span>
+                    <span>{{ formData.quantidadePessoas }} Pessoa(s)</span>
                     <span>{{ pacoteSelecionado.preco | currency:'AOA' }} cada</span>
                 </div>
                 <div class="valor-linha total">
@@ -107,10 +107,13 @@
         </div>
 
         <!-- Botão -->
-        <button class="submit-btn" (click)="criarReserva()" [disabled]="loading || !pacoteSelecionado">
-            <span *ngIf="loading" class="loading-spinner"></span>
-            {{ loading ? 'Processando...' : 'Confirmar Reserva' }}
-        </button>
+        <div class="btn-sb">
+            <button class="submit-btn" (click)="criarReserva()" [disabled]="loading || !pacoteSelecionado">
+     <span *ngIf="loading" class="loading-spinner"></span>
+     {{ loading ? 'Processando...' : 'Confirmar ' }}
+ </button>
+            <button class="btn-back" (click)="router.navigate(['/pacotescard'])">Cancelar</button>
+        </div>
 
         <p class="observacao">* Campos obrigatórios</p>
     </div>

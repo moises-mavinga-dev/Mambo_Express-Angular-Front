@@ -27,9 +27,9 @@ export class ReservaService {
     return this.http.get<MinhasReservasDto[]>(`${this.apiUrl}/minhas-reservas`);
   }
     // ✅ OBTER DETALHES DE UMA RESERVA ESPECÍFICA
-  obterDetalhesReserva(id: string): Observable<MinhasReservasDto> {
+ /* obterDetalhesReserva(id: string): Observable<MinhasReservasDto> {
     return this.http.get<MinhasReservasDto>(`${this.apiUrl}/minhas/${id}`);
-  }
+  }*/
 
   // Cancelar reserva
   cancelarReserva(id: string): Observable<void> {
