@@ -67,7 +67,7 @@ export class ReservaDetalheComponent {
     return {
       id: dto.id,
       nomePacote: dto.pacote?.nomePacote || 'Pacote de Viagem',
-      nomeCidade: dto.destino?.nomeCidade || 'Destino',
+      nomeCidade: dto.destino?.nomeCidade  || 'Destino',
       dataReserva: new Date(dto.dataReserva),
       dataViagem: new Date(dto.dataViagem),
       quantidadePessoas: dto.quantidadePessoas,

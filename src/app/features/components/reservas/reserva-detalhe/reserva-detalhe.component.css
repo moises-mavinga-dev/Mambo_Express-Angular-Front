@@ -1,15 +1,18 @@
 /* ========================================
    CONTAINER PRINCIPAL
 ======================================== */
+
 .detalhe-container {
     min-height: 100vh;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 2rem;
 }
 
+
 /* ========================================
    LOADING
 ======================================== */
+
 .loading-container {
     display: flex;
     flex-direction: column;
@@ -29,7 +32,9 @@
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .loading-container p {
@@ -37,9 +42,11 @@
     font-size: 1.1rem;
 }
 
+
 /* ========================================
    ERRO
 ======================================== */
+
 .error-container {
     max-width: 600px;
     margin: 4rem auto;
@@ -65,9 +72,11 @@
     margin-bottom: 2rem;
 }
 
+
 /* ========================================
    HEADER
 ======================================== */
+
 .page-header {
     display: flex;
     justify-content: space-between;
@@ -116,9 +125,11 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
+
 /* ========================================
    ALERTAS
 ======================================== */
+
 .alert {
     background: white;
     border-radius: 12px;
@@ -146,9 +157,11 @@
     font-weight: 500;
 }
 
+
 /* ========================================
    CARD PRINCIPAL
 ======================================== */
+
 .main-card {
     background: white;
     border-radius: 20px;
@@ -168,9 +181,11 @@
     }
 }
 
+
 /* ========================================
    HEADER DA CARD
 ======================================== */
+
 .card-header-section {
     display: flex;
     justify-content: space-between;
@@ -200,9 +215,11 @@
     white-space: nowrap;
 }
 
+
 /* ========================================
    SEÇÃO DESTINO
 ======================================== */
+
 .destino-section {
     display: flex;
     align-items: center;
@@ -237,18 +254,22 @@
     margin: 0.25rem 0 0 0;
 }
 
+
 /* ========================================
    DIVISOR
 ======================================== */
+
 .divider {
     height: 1px;
     background: linear-gradient(to right, transparent, #e2e8f0, transparent);
     margin: 2rem 0;
 }
 
+
 /* ========================================
    SEÇÕES DE INFORMAÇÃO
 ======================================== */
+
 .info-section {
     margin-bottom: 2.5rem;
 }
@@ -262,9 +283,11 @@
     border-bottom: 2px solid #e2e8f0;
 }
 
+
 /* ========================================
    GRID DE INFORMAÇÕES
 ======================================== */
+
 .info-grid-large {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -341,9 +364,11 @@
     font-size: 0.85rem;
 }
 
+
 /* ========================================
    CARD DE PAGAMENTO
 ======================================== */
+
 .payment-card {
     background: linear-gradient(135deg, #48bb7815 0%, #38a16915 100%);
     border: 2px solid #48bb78;
@@ -398,9 +423,11 @@
     font-weight: 600;
 }
 
+
 /* ========================================
    TIMELINE
 ======================================== */
+
 .timeline {
     position: relative;
     padding-left: 2rem;
@@ -466,9 +493,11 @@
     font-size: 0.9rem;
 }
 
+
 /* ========================================
    AÇÕES
 ======================================== */
+
 .actions-section {
     display: flex;
     gap: 1rem;
@@ -478,9 +507,11 @@
     border-top: 2px solid #e2e8f0;
 }
 
+
 /* ========================================
    BOTÕES
 ======================================== */
+
 .btn-large {
     padding: 1rem 2rem;
     font-size: 1.1rem;
@@ -535,9 +566,11 @@
     transform: none;
 }
 
+
 /* ========================================
    INFORMAÇÕES ADICIONAIS
 ======================================== */
+
 .info-adicional {
     margin-top: 2rem;
 }
@@ -564,9 +597,11 @@
     line-height: 1.6;
 }
 
+
 /* ========================================
    STATUS BADGES
 ======================================== */
+
 .status-pendente {
     background: #fef5e7;
     color: #f39c12;
@@ -592,9 +627,11 @@
     color: #38a169;
 }
 
+
 /* ========================================
    MODAL
 ======================================== */
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -611,8 +648,12 @@
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .modal-content {
@@ -724,60 +765,54 @@
     justify-content: flex-end;
 }
 
+
 /* ========================================
    RESPONSIVO
 ======================================== */
+
 @media (max-width: 768px) {
     .detalhe-container {
         padding: 1rem;
     }
-
     .main-card {
         padding: 1.5rem;
     }
-
     .card-header-section {
         flex-direction: column;
         gap: 1rem;
     }
-
     .card-header-section h1 {
         font-size: 1.5rem;
     }
-
     .info-grid-large {
         grid-template-columns: 1fr;
     }
-
     .destino-section {
         flex-direction: column;
         text-align: center;
     }
-
     .actions-section {
         flex-direction: column;
     }
-
     .btn-large {
         width: 100%;
     }
-
     .modal-content {
         margin: 1rem;
     }
-
     .modal-footer {
         flex-direction: column;
     }
-
     .modal-footer button {
         width: 100%;
     }
 }
 
+
 /* ========================================
    IMPRESSÃO
 ======================================== */
+
 @media print {
     .page-header,
     .actions-section,
@@ -785,12 +820,10 @@
     .btn-back {
         display: none !important;
     }
-
     .detalhe-container {
         background: white;
         padding: 0;
     }
-
     .main-card {
         box-shadow: none;
         border: 1px solid #e2e8f0;
