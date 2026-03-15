@@ -1,0 +1,264 @@
+<div class="gerenciar-reservas-container">
+
+    <!-- ========================================
+         HEADER
+    ======================================== -->
+    <div class="page-header">
+        <div class="header-content">
+            <h1>Gerenciar Reservas</h1>
+            <p>Visualize e gerencie todas as reservas do sistema</p>
+        </div>
+        <div class="header-actions">
+            <button class="btn-secondary" (click)="exportarCSV()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Exportar CSV
+            </button>
+            <button class="btn-primary" (click)="imprimirRelatorio()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <polyline points="6 9 6 2 18 2 18 9"/>
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                    <rect x="6" y="14" width="12" height="8"/>
+                </svg>
+                Imprimir
+            </button>
+        </div>
+    </div>
+
+    <!-- ========================================
+         ESTATÍSTICAS
+    ======================================== -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                📋
+            </div>
+            <div class="stat-content">
+                <span class="stat-label">Total de Reservas</span>
+                <span class="stat-value">{{ estatisticas.total }}</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                ⏳
+            </div>
+            <div class="stat-content">
+                <span class="stat-label">Pendentes</span>
+                <span class="stat-value">{{ estatisticas.pendentes }}</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                ✓
+            </div>
+            <div class="stat-content">
+                <span class="stat-label">Confirmadas</span>
+                <span class="stat-value">{{ estatisticas.confirmadas }}</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                💳
+            </div>
+            <div class="stat-content">
+                <span class="stat-label">Pagas</span>
+                <span class="stat-value">{{ estatisticas.pagas }}</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                ✗
+            </div>
+            <div class="stat-content">
+                <span class="stat-label">Canceladas</span>
+                <span class="stat-value">{{ estatisticas.canceladas }}</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                🏁
+            </div>
+            <div class="stat-content">
+                <span class="stat-label">Concluídas</span>
+                <span class="stat-value">{{ estatisticas.concluidas }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         FILTROS E BUSCA
+    ======================================== -->
+    <div class="filters-container">
+        <div class="filter-tabs">
+            <button class="filter-tab" [class.active]="filtroStatus === 'todas'" (click)="mudarFiltroStatus('todas')">
+                Todas ({{ estatisticas.total }})
+            </button>
+            <button class="filter-tab" [class.active]="filtroStatus === 'pendente'" (click)="mudarFiltroStatus('pendente')">
+                Pendentes ({{ estatisticas.pendentes }})
+            </button>
+            <button class="filter-tab" [class.active]="filtroStatus === 'confirmado'" (click)="mudarFiltroStatus('confirmado')">
+                Confirmadas ({{ estatisticas.confirmadas }})
+            </button>
+            <button class="filter-tab" [class.active]="filtroStatus === 'pago'" (click)="mudarFiltroStatus('pago')">
+                Pagas ({{ estatisticas.pagas }})
+            </button>
+            <button class="filter-tab" [class.active]="filtroStatus === 'cancelado'" (click)="mudarFiltroStatus('cancelado')">
+                Canceladas ({{ estatisticas.canceladas }})
+            </button>
+            <button class="filter-tab" [class.active]="filtroStatus === 'concluida'" (click)="mudarFiltroStatus('concluida')">
+                Concluídas ({{ estatisticas.concluidas }})
+            </button>
+        </div>
+
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Buscar por usuário, pacote ou destino..." [(ngModel)]="filtroBusca" (input)="buscar()">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- ========================================
+         LOADING
+    ======================================== -->
+    <div *ngIf="loading" class="loading-container">
+        <div class="spinner"></div>
+        <p>Carregando reservas...</p>
+    </div>
+
+    <!-- ========================================
+         ERRO
+    ======================================== -->
+    <div *ngIf="erro && !loading" class="alert alert-error">
+        {{ erro }}
+        <button class="btn-retry" (click)="carregarReservas()">Tentar Novamente</button>
+    </div>
+
+    <!-- ========================================
+         TABELA DE RESERVAS
+    ======================================== -->
+    <div *ngIf="!loading && !erro" class="table-section">
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuário</th>
+                        <th>Pacote</th>
+                        <th>Destino</th>
+                        <th>Data Reserva</th>
+                        <th>Data Viagem</th>
+                        <th>Pessoas</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let reserva of reservasPaginadas">
+                        <td>
+                            <span class="id-badge">#{{ reserva.id.substring(0, 8) }}</span>
+                        </td>
+                        <td>{{ reserva.usuario?.nomeUsuario }}</td>
+                        <td>{{ reserva.pacote?.nomePacote }}</td>
+                        <td>{{ reserva.destino?.nomeCidade }}</td>
+                        <td>{{ formatarData(reserva.dataReserva) }}</td>
+                        <td>{{ formatarData(reserva.dataViagem) }}</td>
+                        <td class="text-center">{{ reserva.quantidadePessoas }}</td>
+                        <td class="value-cell">{{ formatarValor(reserva.valorTotal) }}</td>
+                        <td>
+                            <span class="status-badge" [ngClass]="getStatusClass(reserva.status)">
+                                {{ reserva.status }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon" (click)="abrirModal(reserva)" title="Editar Status">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr *ngIf="reservasFiltradas.length === 0">
+                        <td colspan="10" class="empty-cell">
+                            Nenhuma reserva encontrada
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ========================================
+             PAGINAÇÃO
+        ======================================== -->
+        <div class="pagination" *ngIf="totalPaginas > 1">
+            <button class="pagination-btn" [disabled]="paginaAtual === 1" (click)="mudarPagina(paginaAtual - 1)">
+                ← Anterior
+            </button>
+
+            <div class="pagination-info">
+                Página {{ paginaAtual }} de {{ totalPaginas }}
+            </div>
+
+            <button class="pagination-btn" [disabled]="paginaAtual === totalPaginas" (click)="mudarPagina(paginaAtual + 1)">
+                Próxima →
+            </button>
+        </div>
+    </div>
+
+    <!-- ========================================
+         MODAL DE EDIÇÃO
+    ======================================== -->
+    <div *ngIf="showModal" class="modal-overlay" (click)="fecharModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h3>Atualizar Status da Reserva</h3>
+                <button class="btn-close" (click)="fecharModal()">×</button>
+            </div>
+
+            <div class="modal-body" *ngIf="reservaSelecionada">
+                <div class="reserva-info">
+                    <p><strong>ID:</strong> #{{ reservaSelecionada.id.substring(0, 8) }}</p>
+                    <p><strong>Usuário:</strong> {{ reservaSelecionada.usuario?.nomeUsuario }}</p>
+                    <p><strong>Pacote:</strong> {{ reservaSelecionada.pacote?.nomePacote }}</p>
+                    <p><strong>Destino:</strong> {{ reservaSelecionada.destino?.nomeCidade }}</p>
+                    <p><strong>Valor:</strong> {{ formatarValor(reservaSelecionada.valorTotal) }}</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Novo Status</label>
+                    <select class="form-select" [(ngModel)]="novoStatus">
+                        <option [value]="0">Pendente</option>
+                        <option [value]="1">Confirmado</option>
+                        <option [value]="2">Pago</option>
+                        <option [value]="3">Cancelado</option>
+                        <option [value]="4">Concluída</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-secondary" (click)="fecharModal()">
+                    Cancelar
+                </button>
+                <button class="btn-primary" (click)="atualizarStatus()">
+                    Atualizar Status
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,183 @@
+<div class="dashboard-container">
+
+    <!-- Header -->
+    <div class="dashboard-header">
+        <h1>Dashboard</h1>
+        <p>Bem-vindo ao painel administrativo da ViajarAngola</p>
+    </div>
+
+    <!-- Mensagem de Erro -->
+    <div *ngIf="erro" class="alert alert-warning">
+        ⚠️ {{ erro }}
+        <button class="btn-reload" (click)="recarregar()">Recarregar</button>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                📋
+            </div>
+            <div class="stat-content">
+                <span class="stat-label">Total de Reservas</span>
+                <span class="stat-value">{{ stats.totalReservas }}</span>
+                <span class="stat-change positive" *ngIf="stats.totalReservas > 0">Reservas ativas</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                ⏳
+            </div>
+            <div class="stat-content">
+                <span class="stat-label">Reservas Pendentes</span>
+                <span class="stat-value">{{ stats.reservasPendentes }}</span>
+                <span class="stat-change" *ngIf="stats.reservasPendentes > 0">Requer atenção</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                🌍
+            </div>
+            <div class="stat-content">
+                <span class="stat-label">Destinos Ativos</span>
+                <span class="stat-value">{{ stats.totalDestinos }}</span>
+                <span class="stat-change positive">Destinos únicos</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                📦
+            </div>
+            <div class="stat-content">
+                <span class="stat-label">Pacotes Disponíveis</span>
+                <span class="stat-value">{{ stats.totalPacotes }}</span>
+                <span class="stat-change positive">Pacotes únicos</span>
+            </div>
+        </div>
+
+        <div class="stat-card stat-card-large">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                💰
+            </div>
+            <div class="stat-content">
+                <span class="stat-label">Receita Total</span>
+                <span class="stat-value">{{ formatCurrency(stats.receitaMensal) }}</span>
+                <span class="stat-change positive">Reservas pagas e concluídas</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                👥
+            </div>
+            <div class="stat-content">
+                <span class="stat-label">Usuários Ativos</span>
+                <span class="stat-value">{{ stats.usuariosAtivos }}</span>
+                <span class="stat-change positive">Com reservas</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <h2>Ações Rápidas</h2>
+        <div class="actions-grid">
+            <a routerLink="/admin/reservas" class="action-card">
+                <div class="action-icon">📋</div>
+                <h3>Ver Reservas</h3>
+                <p>Gerenciar todas as reservas</p>
+            </a>
+
+            <a routerLink="/admin/destinos" class="action-card">
+                <div class="action-icon">🌍</div>
+                <h3>Adicionar Destino</h3>
+                <p>Cadastrar novo destino</p>
+            </a>
+
+            <a routerLink="/admin/pacotes" class="action-card">
+                <div class="action-icon">📦</div>
+                <h3>Criar Pacote</h3>
+                <p>Montar novo pacote turístico</p>
+            </a>
+
+            <a routerLink="/admin/relatorios" class="action-card">
+                <div class="action-icon">📈</div>
+                <h3>Relatórios</h3>
+                <p>Visualizar estatísticas</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Recent Reservas -->
+    <div class="recent-section">
+        <div class="section-header">
+            <h2>Reservas Recentes</h2>
+            <a routerLink="/admin/reservas" class="view-all-link">Ver Todas →</a>
+        </div>
+
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuário</th>
+                        <th>Pacote</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let reserva of recentReservas">
+                        <td><span class="id-badge">#{{ reserva.id.substring(0, 8) }}</span></td>
+                        <td>{{ reserva.usuario?.nomeUsuario }}</td>
+                        <td>{{ reserva.pacote?.nomePacote }}</td>
+                        <td class="value-cell">{{ formatCurrency(reserva.valorTotal) }}</td>
+                        <td>
+                            <span class="status-badge" [ngClass]="getStatusClass(reserva.status)">
+                                {{ getStatusTexto(reserva.status) }}
+                            </span>
+                        </td>
+                        <td>{{ formatarData(reserva.dataReserva) }}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon" title="Ver Detalhes" [routerLink]="['/detalhe-reservas', reserva.id]">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                        <circle cx="12" cy="12" r="3"/>
+                                    </svg>
+                                </button>
+                                <button class="btn-icon" title="Editar" [routerLink]="['/admin/reservas']">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Mensagem quando não há reservas -->
+                    <tr *ngIf="recentReservas.length === 0 && !loading">
+                        <td colspan="7" style="text-align: center; padding: 2rem; color: #718096;">
+                            Nenhuma reserva encontrada
+                        </td>
+                    </tr>
+
+                    <!-- Loading -->
+                    <tr *ngIf="loading">
+                        <td colspan="7" style="text-align: center; padding: 2rem;">
+                            <div class="spinner" style="margin: 0 auto;"></div>
+                            Carregando...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
