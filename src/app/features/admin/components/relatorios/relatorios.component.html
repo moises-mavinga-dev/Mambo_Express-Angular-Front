@@ -1,0 +1,97 @@
+<div class="relatorios-container">
+    <div class="page-header">
+        <div class="header-content">
+            <h1>Relatórios e Estatísticas</h1>
+            <p>Análise de desempenho e métricas do sistema</p>
+        </div>
+        <div class="header-actions">
+            <button class="btn-secondary" (click)="exportarPDF()">📄 Exportar PDF</button>
+            <button class="btn-primary" (click)="imprimirRelatorio()">🖨️ Imprimir</button>
+        </div>
+    </div>
+
+    <!-- Filtro de Período -->
+    <div class="filtro-periodo">
+        <div class="form-group"><label>Data Início</label><input type="date" class="form-input" [(ngModel)]="dataInicio"></div>
+        <div class="form-group"><label>Data Fim</label><input type="date" class="form-input" [(ngModel)]="dataFim"></div>
+        <button class="btn-primary" (click)="aplicarFiltro()">Aplicar Filtro</button>
+    </div>
+
+    <div *ngIf="loading" class="loading-container">
+        <div class="spinner"></div>
+        <p>Gerando relatórios...</p>
+    </div>
+
+    <div *ngIf="!loading">
+        <!-- Métricas Principais -->
+        <h2 class="title">📊 Visão Geral</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">📋</div>
+                <div class="stat-content"><span class="stat-label">Total Reservas</span><span class="stat-value">{{ relatorioGeral.totalReservas }}</span></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">💰</div>
+                <div class="stat-content"><span class="stat-label">Receita Total</span><span class="stat-value">{{ formatarValor(relatorioGeral.receitaTotal) }}</span></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">💳</div>
+                <div class="stat-content"><span class="stat-label">Bilhete Médio</span><span class="stat-value">{{ formatarValor(relatorioGeral.ticketMedio) }}</span></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">📈</div>
+                <div class="stat-content"><span class="stat-label">Taxa Conversão</span><span class="stat-value">{{ formatarPercentual(relatorioGeral.taxaConversao) }}</span></div>
+            </div>
+        </div>
+
+        <!-- Reservas por Status -->
+        <h2 class="title">📊 Reservas por Status</h2>
+        <div class="status-grid">
+            <div class="status-item"><span class="status-icon pendente" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">⏳</span>
+                <div class="status-content"><strong class="status-label">Pendentes</strong> <span class="statu-value">{{ reservasPorStatus.pendentes }}</span></div>
+            </div>
+            <div class="status-item"><span class="status-icon confirmado" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">✓</span>
+                <div class="status-content"><strong class="status-label">Confirmadas</strong><span> {{ reservasPorStatus.confirmadas }}</span></div>
+            </div>
+            <div class="status-item"><span class="status-icon pago" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">💳</span>
+                <div class="status-content"><strong class="status-label">Pagas</strong> <span class="statu-value">{{ reservasPorStatus.pagas }}</span></div>
+            </div>
+            <div class="status-item"><span class="status-icon cancelado" style="background: linear-gradient(135deg, #feac4f 0%, #fecf0094 100%);">✗</span>
+                <div class="status-content"><strong class="status-label">Canceladas</strong> <span class="statu-value">{{ reservasPorStatus.canceladas }}</span></div>
+            </div>
+            <div class="status-item"><span class="status-icon concluido" style="background: linear-gradient(135deg, #4ffefe 0%, #00fe61 100%);">✓</span>
+                <div class="status-content"><strong class="status-label">Concluídas</strong> <span class="statu-value">{{ reservasPorStatus.concluidas }}</span></div>
+            </div>
+        </div>
+
+        <!-- Top Destinos -->
+        <h2 class="title">🌍 Top 5 Destinos Mais Vendidos</h2>
+        <div class="ranking-list">
+            <div *ngFor="let item of destinosMaisVendidos; let i = index" class="ranking-item">
+                <span class="ranking-pos">{{ i + 1 }}º</span>
+                <div class="ranking-info"><strong>{{ item.destino }}</strong><small>{{ item.quantidade }} reservas</small></div>
+                <span class="ranking-value">{{ formatarValor(item.receita) }}</span>
+            </div>
+            <div *ngIf="destinosMaisVendidos.length === 0" class="empty-state">Nenhum dado disponível</div>
+        </div>
+
+        <!-- Top Pacotes -->
+        <h2 class="title">📦 Top 5 Pacotes Mais Vendidos</h2>
+        <div class="ranking-list">
+            <div *ngFor="let item of pacotesMaisVendidos; let i = index" class="ranking-item">
+                <span class="ranking-pos">{{ i + 1 }}º</span>
+                <div class="ranking-info"><strong>{{ item.pacote }}</strong><small>{{ item.quantidade }} vendas</small></div>
+                <span class="ranking-value">{{ formatarValor(item.receita) }}</span>
+            </div>
+            <div *ngIf="pacotesMaisVendidos.length === 0" class="empty-state">Nenhum dado disponível</div>
+        </div>
+
+        <!-- Resumo -->
+        <h2 class="title">📋 Resumo do Sistema</h2>
+        <div class="resumo-grid">
+            <div class="resumo-item"><span class="resumo-label">Destinos Cadastrados</span><span class="resumo-value">{{ relatorioGeral.totalDestinos }}</span></div>
+            <div class="resumo-item"><span class="resumo-label">Pacotes Disponíveis</span><span class="resumo-value">{{ relatorioGeral.totalPacotes }}</span></div>
+            <div class="resumo-item"><span class="resumo-label">Usuários Registrados</span><span class="resumo-value">{{ relatorioGeral.totalUsuarios }}</span></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,141 @@
+<div class="gerenciar-usuarios-container">
+    <div class="page-header">
+        <div class="header-content">
+            <h1>Gerenciar Usuários</h1>
+            <p>Gerencie usuários e suas permissões</p>
+        </div>
+    </div>
+
+    <div *ngIf="mensagemSucesso" class="alert alert-success">✓ {{ mensagemSucesso }}</div>
+    <div *ngIf="erro && !loading" class="alert alert-error">⚠️ {{ erro }}</div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">👥</div>
+            <div class="stat-content"><span class="stat-label">Total</span><span class="stat-value">{{ estatisticas.total }}</span></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">✓</div>
+            <div class="stat-content"><span class="stat-label">Ativos</span><span class="stat-value">{{ estatisticas.ativos }}</span></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">👤</div>
+            <div class="stat-content"><span class="stat-label">Clientes</span><span class="stat-value">{{ estatisticas.clientes }}</span></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">👨‍💼</div>
+            <div class="stat-content"><span class="stat-label">Agentes</span><span class="stat-value">{{ estatisticas.agentes }}</span></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">🔑</div>
+            <div class="stat-content"><span class="stat-label">Admins</span><span class="stat-value">{{ estatisticas.admins }}</span></div>
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="filters-section">
+        <input type="text" class="search-input" placeholder="Buscar..." [(ngModel)]="filtroBusca" (input)="buscar()">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+            </svg>
+        <select class="filter-select" [(ngModel)]="filtroRole" (change)="buscar()">
+            <option value="todos">Todas as Roles</option>
+            <option value="Cliente">Clientes</option>
+            <option value="Agente">Agentes</option>
+            <option value="Admin">Admins</option>
+        </select>
+        <select class="filter-select" [(ngModel)]="filtroAtivo" (change)="buscar()">
+            <option value="todos">Todos</option>
+            <option value="ativos">Ativos</option>
+            <option value="inativos">Inativos</option>
+        </select>
+    </div>
+
+    <div *ngIf="loading" class="loading-container">
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+    </div>
+
+    <!-- Tabela -->
+    <div *ngIf="!loading" class="table-section">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Roles</th>
+                    <th>Status</th>
+                    <th>Data Criação</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuariosPaginados">
+                    <td><strong>{{ usuario.nomeUsuario }}</strong></td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.telefone || 'N/A' }}</td>
+                    <td><span *ngFor="let role of usuario.roles" [ngClass]="getRoleClass(role)" class="role-badge">{{ role }}</span></td>
+                    <td><span class="status-badge" [class.ativo]="usuario.ativo">{{ usuario.ativo ? 'Ativo' : 'Inativo' }}</span></td>
+                    <td>{{ formatarData(usuario.dataCriacao) }}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn-icon btn-edit" (click)="abrirModalEditar(usuario)" title="Editar">✏️</button>
+                            <button class="btn-icon btn-roles" (click)="abrirModalRoles(usuario)" title="Permissões">🔑</button>
+                            <button class="btn-icon btn-delete" (click)="excluirUsuario(usuario)" title="Excluir">🗑️</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="usuariosFiltrados.length === 0">
+                    <td colspan="7" class="empty-cell">Nenhum usuário encontrado</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="pagination" *ngIf="totalPaginas > 1">
+            <button class="pagination-btn" [disabled]="paginaAtual === 1" (click)="mudarPagina(paginaAtual - 1)">← Anterior</button>
+            <div class="pagination-info">Página {{ paginaAtual }} de {{ totalPaginas }}</div>
+            <button class="pagination-btn" [disabled]="paginaAtual === totalPaginas" (click)="mudarPagina(paginaAtual + 1)">Próxima →</button>
+        </div>
+    </div>
+
+    <!-- Modal Editar -->
+    <div *ngIf="showModal" class="modal-overlay" (click)="fecharModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h3>Editar Usuário</h3><button class="btn-close" (click)="fecharModal()">×</button></div>
+            <div class="modal-body">
+                <div class="form-group"><label>Nome *</label><input type="text" class="form-input" [(ngModel)]="form.nomeUsuario"></div>
+                <div class="form-group"><label>Email *</label><input type="email" class="form-input" [(ngModel)]="form.email"></div>
+                <div class="form-group"><label>Telefone</label><input type="text" class="form-input" [(ngModel)]="form.telefone"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" (click)="fecharModal()">Cancelar</button>
+                <button class="btn-primary" (click)="salvarUsuario()">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Roles -->
+    <div *ngIf="showRoleModal" class="modal-overlay" (click)="fecharModalRoles()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h3>Gerenciar Permissões</h3><button class="btn-close" (click)="fecharModalRoles()">×</button></div>
+            <div class="modal-body">
+                <p *ngIf="usuarioSelecionado"><strong>Usuário:</strong> {{ usuarioSelecionado.nomeUsuario }}</p>
+                <div class="roles-list">
+                    <div *ngFor="let role of rolesDisponiveis" class="role-item">
+                        <input type="checkbox" [id]="role" [checked]="isRoleSelecionada(role)" (change)="toggleRole(role)">
+                        <label [for]="role">{{ role }}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" (click)="fecharModalRoles()">Cancelar</button>
+                <button class="btn-primary" (click)="salvarRoles()">Salvar Permissões</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -34,11 +34,13 @@
          font-size: 1.5rem;
          font-weight: 400;
          margin-bottom: 0.5rem;
+         font-family: Arial, Helvetica, sans-serif;
      }
      
      .logo-section p {
          color: #94a3b8;
          font-size: 1rem;
+         font-family: Arial, Helvetica, sans-serif;
      }
      
      .error-alert {
@@ -51,6 +53,7 @@
          display: flex;
          align-items: center;
          gap: 0.75rem;
+         font-family: Arial, Helvetica, sans-serif;
      }
      
      .error-icon {
@@ -70,6 +73,7 @@
          color: #3062ec;
          font-weight: 2;
          margin-bottom: 0.5rem;
+         font-family: Arial, Helvetica, sans-serif;
      }
      
      .form-input {
@@ -81,6 +85,7 @@
          color: rgb(68, 63, 63);
          font-size: 1rem;
          transition: all 0.3s ease;
+         font-family: Arial, Helvetica, sans-serif;
      }
      
      .form-input:focus {
@@ -112,6 +117,7 @@
          cursor: pointer;
          font-size: 1rem;
          padding: 0;
+         font-family: Arial, Helvetica, sans-serif;
      }
      
      .form-actions {
@@ -127,6 +133,7 @@
          gap: 0.2rem;
          color: #94a3b8;
          cursor: pointer;
+         font-family: Arial, Helvetica, sans-serif;
      }
      
      .checkbox-label input {
@@ -137,6 +144,7 @@
          color: #3062ec;
          text-decoration: none;
          font-size: 0.9rem;
+         font-family: Arial, Helvetica, sans-serif;
      }
      
      .link-text:hover {
@@ -175,6 +183,7 @@
      .register-section p {
          color: #94a3b8;
          margin-bottom: 0.5rem;
+         font-family: Arial, Helvetica, sans-serif;
      }
      
      .link-register {
@@ -182,6 +191,7 @@
          text-decoration: none;
          font-weight: 200;
          font-size: 1rem;
+         font-family: Arial, Helvetica, sans-serif;
      }
      
      .link-register:hover {

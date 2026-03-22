@@ -90,7 +90,7 @@ export class CriarReservaComponent implements OnInit {
     this.loadingData = true;
 
     // Carregar destinos
-    this.destinoService.getAll().subscribe({
+    this.destinoService.obterTodos().subscribe({
       next: (destinos) => {
         this.destinos = destinos;
       },

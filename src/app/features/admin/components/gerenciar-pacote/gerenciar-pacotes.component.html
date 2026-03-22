@@ -1,0 +1,230 @@
+<div class="gerenciar-pacotes-container">
+
+    <!-- Header -->
+    <div class="page-header">
+        <div class="header-content">
+            <h1>Gerenciar Pacotes</h1>
+            <p>Cadastre e gerencie os pacotes turísticos</p>
+        </div>
+        <button class="btn-primary" (click)="abrirModalNovo()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Novo Pacote
+        </button>
+    </div>
+
+    <!-- Mensagem de Sucesso -->
+    <div *ngIf="mensagemSucesso" class="alert alert-success">
+        ✓ {{ mensagemSucesso }}
+    </div>
+
+    <!-- Mensagem de Erro -->
+    <div *ngIf="erro && !loading" class="alert alert-error">
+        ⚠️ {{ erro }}
+        <button class="btn-retry" (click)="carregarPacotes()">Tentar Novamente</button>
+    </div>
+
+    <!-- Estatísticas -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                📦
+            </div>
+            <div class="stat-content">
+                <span class="stat-label">Total de Pacotes</span>
+                <span class="stat-value">{{ estatisticas.total }}</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                ✓
+            </div>
+            <div class="stat-content">
+                <span class="stat-label">Disponíveis</span>
+                <span class="stat-value">{{ estatisticas.disponiveis }}</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                ✗
+            </div>
+            <div class="stat-content">
+                <span class="stat-label">Indisponíveis</span>
+                <span class="stat-value">{{ estatisticas.indisponiveis }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="filters-section">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Buscar por nome ou descrição..." [(ngModel)]="filtroBusca" (input)="buscar()">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+            </svg>
+        </div>
+
+        <div class="filter-selects">
+            <select class="filter-select" [(ngModel)]="filtroDestino" (change)="buscar()">
+                <option value="todos">Todos os Destinos</option>
+                <option *ngFor="let destino of destinos" [value]="destino.id">
+                    {{ destino.nomeCidade }}, {{ destino.pais }}
+                </option>
+            </select>
+
+            <select class="filter-select" [(ngModel)]="filtroDisponivel" (change)="buscar()">
+                <option value="todos">Todos os Status</option>
+                <option value="disponiveis">Disponíveis</option>
+                <option value="indisponiveis">Indisponíveis</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="loading-container">
+        <div class="spinner"></div>
+        <p>Carregando pacotes...</p>
+    </div>
+
+    <!-- Tabela de Pacotes -->
+    <div *ngIf="!loading" class="table-section">
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Nome do Pacote</th>
+                        <th>Destino</th>
+                        <th>Duração</th>
+                        <th>Preço</th>
+                        <th>Disponível</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let pacote of pacotesPaginados">
+                        <td>
+                            <div class="pacote-info">
+                                <strong>{{ pacote.nomePacote }}</strong>-
+                                <span class="descricao-mini">{{ pacote.descricao }}</span>
+                            </div>
+                        </td>
+                        <td>{{ getNomeDestino(pacote.destinoId) }}</td>
+                        <td>{{ formatarDuracao(pacote.duracao) }}</td>
+                        <td class="value-cell">{{ formatarValor(pacote.preco) }}</td>
+                        <td>
+                            <button class="toggle-btn" [class.active]="pacote.disponivel" (click)="toggleDisponivel(pacote)" title="Clique para alterar">
+                                <span class="toggle-slider"></span>
+                                <span class="toggle-label">{{ pacote.disponivel ? 'Sim' : 'Não' }}</span>
+                            </button>
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-edit" (click)="abrirModalEditar(pacote)" title="Editar">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                    </svg>
+                                </button>
+                                <button class="btn-icon btn-delete" (click)="excluirPacote(pacote)" title="Excluir">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <polyline points="3 6 5 6 21 6"/>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr *ngIf="pacotesFiltrados.length === 0">
+                        <td colspan="6" class="empty-cell">
+                            Nenhum pacote encontrado
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Paginação -->
+        <div class="pagination" *ngIf="totalPaginas > 1">
+            <button class="pagination-btn" [disabled]="paginaAtual === 1" (click)="mudarPagina(paginaAtual - 1)">
+                ← Anterior
+            </button>
+            <div class="pagination-info">
+                Página {{ paginaAtual }} de {{ totalPaginas }}
+            </div>
+            <button class="pagination-btn" [disabled]="paginaAtual === totalPaginas" (click)="mudarPagina(paginaAtual + 1)">
+                Próxima →
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div *ngIf="showModal" class="modal-overlay" (click)="fecharModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h3>{{ modoEdicao ? 'Editar Pacote' : 'Novo Pacote' }}</h3>
+                <button class="btn-close" (click)="fecharModal()">×</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Nome do Pacote *</label>
+                    <input type="text" class="form-input" [(ngModel)]="form.nomePacote" placeholder="Ex: Pacote Completo Luanda">
+                </div>
+
+                <div class="form-group">
+                    <label>Descrição *</label>
+                    <textarea class="form-textarea" [(ngModel)]="form.descricao" rows="4" placeholder="Descreva o que está incluído no pacote..."></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Destino *</label>
+                        <select class="form-select" [(ngModel)]="form.destinoId" [disabled]="modoEdicao">
+                            <option value="">Selecione um destino</option>
+                            <option *ngFor="let destino of destinos" [value]="destino.id">
+                                {{ destino.nomeCidade }}, {{ destino.pais }}
+                            </option>
+                        </select>
+                        <small *ngIf="modoEdicao" class="form-hint">O destino não pode ser alterado após criação</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Duração (dias) *</label>
+                        <input type="number" class="form-input" [(ngModel)]="form.duracao" min="1" placeholder="0">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Preço (AOA) *</label>
+                        <input type="number" class="form-input" [(ngModel)]="form.preco" min="0" step="0.01" placeholder="0.00">
+                    </div>
+
+                    <div class="form-group" *ngIf="modoEdicao">
+                        <label>Disponível</label>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="disponivel" [(ngModel)]="form.disponivel">
+                            <label for="disponivel">Pacote está disponível para venda</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-secondary" (click)="fecharModal()">
+                    Cancelar
+                </button>
+                <button class="btn-primary" (click)="salvarPacote()">
+                    {{ modoEdicao ? 'Atualizar' : 'Criar' }} Pacote
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

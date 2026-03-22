@@ -24,14 +24,15 @@
                                                     font-size: 32px;
                                                     font-weight: 700;
                                                     color: #3062ec;
-                                                    ;
                                                     margin: 0 0 8px 0;
+                                                    font-family: Arial, Helvetica, sans-serif;
                                                 }
                                                 
                                                 .header-content p {
                                                     color: #3062ec;
                                                     margin: 0;
                                                     font-size: 16px;
+                                                    font-family: Arial, Helvetica, sans-serif;
                                                 }
                                                 
                                                 .btn-nova-reserva {
@@ -70,6 +71,7 @@
                                                     background: #8dcada;
                                                     color: #3062ec;
                                                     border-left: 4px solid #3062ec;
+                                                    font-family: Arial, Helvetica, sans-serif;
                                                 }
                                                 
                                                 .alert-error {
@@ -107,14 +109,14 @@
                                                 }
                                                 
                                                 .stat-card {
-                                                    background: linear-gradient(135deg, #3062ec 0%, #3062ec 100%);
+                                                    background: white;
                                                     /* background-color: #eaeef138;*/
                                                     border-radius: 12px;
                                                     padding: 20px;
                                                     display: flex;
                                                     align-items: center;
                                                     gap: 16px;
-                                                    box-shadow: 0 2px 8px rgba(207, 203, 203, 0.185);
+                                                    box-shadow: 0 2px 8px rgba(207, 203, 203, 0.877);
                                                     transition: all 0.3s ease;
                                                 }
                                                 
@@ -130,9 +132,9 @@
                                                     display: flex;
                                                     align-items: center;
                                                     justify-content: center;
-                                                    background: linear-gradient(135deg, #edf1f1 0%, #e6ecec 100%);
+                                                    background: rgba(52, 73, 196, 0.856);
                                                     border-radius: 12px;
-                                                    filter: drop-shadow(0 4px 8px rgba(43, 70, 190, 0.219));
+                                                    filter: drop-shadow(0 4px 8px rgb(237, 238, 243));
                                                 }
                                                 
                                                 .stat-info {
@@ -143,14 +145,16 @@
                                                 .stat-value {
                                                     font-size: 28px;
                                                     font-weight: 700;
-                                                    color: #edeff1;
+                                                    color: #3363c9;
                                                     line-height: 1;
+                                                    font-family: Arial, Helvetica, sans-serif;
                                                 }
                                                 
                                                 .stat-label {
                                                     font-size: 14px;
-                                                    color: #e6e8eb;
+                                                    color: #3363c9;
                                                     margin-top: 4px;
+                                                    font-family: Arial, Helvetica, sans-serif;
                                                 }
                                                 /* ========================================
    FILTROS E ORDENAÇÃO
@@ -177,25 +181,25 @@
                                                 
                                                 .filter-tab {
                                                     padding: 10px 20px;
-                                                    border: 2px solid #3062ec;
-                                                    background: linear-gradient(135deg, #3062ec 0%, #3062ec 100%);
+                                                    border: 2px solid #d8d9da;
+                                                    background: white;
                                                     border-radius: 8px;
                                                     font-weight: 500;
-                                                    color: white;
+                                                    color: #3363c9;
                                                     cursor: pointer;
                                                     transition: all 0.3s ease;
                                                     white-space: nowrap;
+                                                    font-family: Arial, Helvetica, sans-serif;
                                                 }
                                                 
                                                 .filter-tab:hover {
-                                                    border-color: #3062ec;
+                                                    border-color: #43c5e6;
                                                     color: #43c5e6;
                                                 }
                                                 
                                                 .filter-tab.active {
-                                                    background: linear-gradient(135deg, #3062ec 0%, #3062ec 100%);
-                                                    color: white;
-                                                    border-color: transparent;
+                                                    background: white;
+                                                    border-color: 2px solid #f2f3f3;
                                                 }
                                                 
                                                 .sort-container {
@@ -208,15 +212,16 @@
                                                     font-weight: 500;
                                                     color: #3062ec;
                                                     white-space: nowrap;
+                                                    font-family: Arial, Helvetica, sans-serif;
                                                 }
                                                 
                                                 .sort-select {
                                                     padding: 10px 16px;
-                                                    border: 2px solid #3062ec;
+                                                    border: 2px solid #f1f1f3;
                                                     border-radius: 8px;
                                                     font-size: 14px;
-                                                    color: #080808;
-                                                    background: linear-gradient(135deg, #3062ec 0%, #3062ec 100%);
+                                                    color: #3363c9;
+                                                    background: white;
                                                     cursor: pointer;
                                                     transition: border-color 0.3s ease;
                                                 }
@@ -286,6 +291,7 @@
                                                     font-size: 13px;
                                                     font-weight: 600;
                                                     text-align: center;
+                                                    font-family: Arial, Helvetica, sans-serif;
                                                 }
                                                 
                                                 .card-header {
@@ -303,6 +309,7 @@
                                                     font-weight: 700;
                                                     color: #3062ec;
                                                     margin: 0 0 8px 0;
+                                                    font-family: Arial, Helvetica, sans-serif;
                                                 }
                                                 
                                                 .destino {
@@ -386,6 +393,7 @@
                                                     text-transform: uppercase;
                                                     letter-spacing: 0.5px;
                                                     font-weight: 600;
+                                                    font-family: Arial, Helvetica, sans-serif;
                                                 }
                                                 
                                                 .info-value {
@@ -393,6 +401,7 @@
                                                     color: #84888f;
                                                     font-weight: 800;
                                                     margin-top: 2px;
+                                                    font-family: Arial, Helvetica, sans-serif;
                                                 }
                                                 
                                                 .pagamento-info {
@@ -405,6 +414,7 @@
                                                     color: #3062ec;
                                                     font-size: 14px;
                                                     font-weight: 500;
+                                                    font-family: Arial, Helvetica, sans-serif;
                                                 }
                                                 
                                                 .card-footer {
@@ -542,6 +552,7 @@
                                                     font-weight: 700;
                                                     color: #3062ec;
                                                     margin: 0;
+                                                    font-family: Arial, Helvetica, sans-serif;
                                                 }
                                                 
                                                 .btn-close {
@@ -581,6 +592,7 @@
                                                     margin: 8px 0;
                                                     color: #4b5563;
                                                     font-size: 14px;
+                                                    font-family: Arial, Helvetica, sans-serif;
                                                 }
                                                 
                                                 .form-group {
@@ -593,6 +605,7 @@
                                                     color: #374151;
                                                     margin-bottom: 8px;
                                                     font-size: 14px;
+                                                    font-family: Arial, Helvetica, sans-serif;
                                                 }
                                                 
                                                 .form-textarea {

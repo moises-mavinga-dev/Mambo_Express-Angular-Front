@@ -116,15 +116,16 @@
             <button class="filter-tab" [class.active]="filtroStatus === 'concluida'" (click)="mudarFiltroStatus('concluida')">
                 Concluídas ({{ estatisticas.concluidas }})
             </button>
-        </div>
-
-        <div class="search-container">
-            <input type="text" class="search-input" placeholder="Buscar por usuário, pacote ou destino..." [(ngModel)]="filtroBusca" (input)="buscar()">
-            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Buscar por usuário, pacote ou destino..." [(ngModel)]="filtroBusca" (input)="buscar()">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <circle cx="11" cy="11" r="8"/>
                 <path d="m21 21-4.35-4.35"/>
             </svg>
+            </div>
         </div>
+
+
     </div>
 
     <!-- ========================================

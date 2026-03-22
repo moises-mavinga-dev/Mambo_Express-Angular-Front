@@ -104,20 +104,20 @@ export const routes: Routes = [
         component: DashboardComponent,
         data: { title: 'Dashboard' }
       },
-       /* {
+        {
         path: 'destinos',
         loadComponent: () => 
-          import('./features/admin/components/gerenciar-destinos/gerenciar-destinos.component')
+          import('./features/admin/components/gerenciar-destino/gerenciar-destinos.component')
             .then(m => m.GerenciarDestinosComponent),
         data: { title: 'Gerenciar Destinos' }
       },
       {
         path: 'pacotes',
         loadComponent: () => 
-          import('./features/admin/components/gerenciar-pacotes/gerenciar-pacotes.component')
+          import('./features/admin/components/gerenciar-pacote/gerenciar-pacotes.component')
             .then(m => m.GerenciarPacotesComponent),
         data: { title: 'Gerenciar Pacotes' }
-      },*/
+      },
       {
         path: 'reservas',
         loadComponent: () => 
@@ -125,7 +125,7 @@ export const routes: Routes = [
             .then(m => m.GerenciarReservasComponent),
         data: { title: 'Gerenciar Reservas' }
       },
-     /* {
+      {
         path: 'usuarios',
         loadComponent: () => 
           import('./features/admin/components/gerenciar-usuarios/gerenciar-usuarios.component')
@@ -139,7 +139,7 @@ export const routes: Routes = [
             .then(m => m.RelatoriosComponent),
         data: { title: 'Relatórios' }
       },
-      {
+    /*  {
         path: 'configuracoes',
         loadComponent: () => 
           import('./features/admin/components/configuracoes/configuracoes.component')

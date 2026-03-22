@@ -22,6 +22,7 @@
         line-height: 1.2;
         margin-bottom: 1.5rem;
         color: #3062ec;
+        font-family: Arial, Helvetica, sans-serif;
     }
     
     .highlight {
@@ -31,6 +32,7 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        font-family: Arial, Helvetica, sans-serif;
     }
     
     .hero-description {
@@ -39,6 +41,7 @@
         color: #3062ec;
         margin-bottom: 2.5rem;
         max-width: 90%;
+        font-family: Arial, Helvetica, sans-serif;
     }
     
     .cta-buttons {
@@ -59,6 +62,7 @@
     .btn-primary {
         background: linear-gradient(135deg, #4a97de 0%, #225bc5 100%);
         color: #0f1f2f;
+        font-family: Arial, Helvetica, sans-serif;
     }
     
     .btn-primary:hover {
@@ -70,6 +74,7 @@
         background: transparent;
         color: #1a3358;
         border: 2px solid rgba(15, 56, 131, 0.692);
+        font-family: Arial, Helvetica, sans-serif;
     }
     
     .btn-secondary:hover {
@@ -147,6 +152,7 @@
         font-size: 0.9rem;
         line-height: 1.6;
         color: #e2e8f0;
+        font-family: Arial, Helvetica, sans-serif;
     }
     
     .decorative-circle {

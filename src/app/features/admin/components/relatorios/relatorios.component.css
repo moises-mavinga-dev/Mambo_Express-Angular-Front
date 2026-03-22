@@ -1,0 +1,399 @@
+/* Container Principal */
+
+.relatorios-container {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+
+/* Header */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.header-content h1 {
+    font-size: 2rem;
+    font-weight: 400;
+    color: #2d3748;
+    margin: 0 0 0.5rem 0;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 0;
+}
+
+.header-content p {
+    color: #718096;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+
+/* Roles Badges */
+
+.role-badge {
+    display: inline-block;
+    padding: 0.25rem 0.625rem;
+    margin: 0.125rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.role-admin {
+    background: #fee;
+    color: #c53030;
+}
+
+.role-agente {
+    background: #edf2ff;
+    color: #667eea;
+}
+
+.role-cliente {
+    background: #f0fdf4;
+    color: #48bb78;
+}
+
+.header-content {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn-primary,
+.btn-secondary {
+    display: inline;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: #e2e8f0;
+    color: #2d3748;
+}
+
+.btn-secondary:hover {
+    background: #cbd5e0;
+}
+
+
+/* Status Badge */
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: #e2e8f0;
+    color: #718096;
+}
+
+.status-badge.ativo {
+    background: #f0fdf4;
+    color: #48bb78;
+}
+
+
+/* Filtros Section */
+
+.filters-section {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.filter-select {
+    padding: 0.75rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+}
+
+
+/* Roles List (Modal) */
+
+.roles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.role-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: #f7fafc;
+    border-radius: 8px;
+}
+
+.role-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.role-item label {
+    cursor: pointer;
+    font-weight: 500;
+}
+
+
+/* Relatórios */
+
+.filtro-periodo {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+    padding: 0.5rem;
+    background: white;
+    border-radius: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 0.5rem;
+}
+
+.form-input {
+    border-radius: 5px;
+    padding: 0.6rem;
+    margin-right: 12rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.status-item {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.status-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5px;
+}
+
+.stat-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.status-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.status-label {
+    font-size: 0.8rem;
+    color: #718096;
+    font-weight: 500;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #718096;
+    font-weight: 500;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #2d3748;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.statu-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #2d3748;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.title {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.status-icon {
+    font-size: 2rem;
+}
+
+.status-icon.pendente {
+    color: #f39c12;
+}
+
+.status-icon.confirmado {
+    color: #667eea;
+}
+
+.status-icon.pago {
+    color: #48bb78;
+}
+
+.status-icon.cancelado {
+    color: #f56565;
+}
+
+.status-icon.concluido {
+    color: #38a169;
+}
+
+.ranking-list {
+    display: grid;
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.ranking-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.ranking-item:last-child {
+    border-bottom: none;
+}
+
+.ranking-pos {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #667eea;
+    min-width: 40px;
+}
+
+.ranking-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.ranking-info strong {
+    color: #2d3748;
+}
+
+.ranking-info small {
+    color: #718096;
+    font-size: 0.85rem;
+}
+
+.ranking-value {
+    font-weight: 700;
+    color: #48bb78;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.resumo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.resumo-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.resumo-label {
+    color: #718096;
+    font-size: 0.9rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.resumo-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3748;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: #718096;
+}
+
+@media print {
+    .page-header button,
+    .filtro-periodo {
+        display: none;
+    }
+}

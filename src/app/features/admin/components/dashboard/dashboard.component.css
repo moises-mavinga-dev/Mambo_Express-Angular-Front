@@ -21,11 +21,13 @@
     font-weight: 700;
     color: #2d3748;
     margin: 0 0 0.5rem 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .dashboard-header p {
     color: #718096;
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 
@@ -81,17 +83,20 @@
     font-size: 0.875rem;
     color: #718096;
     font-weight: 500;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .stat-value {
     font-size: 2rem;
     font-weight: 700;
     color: #2d3748;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .stat-change {
     font-size: 0.8rem;
     color: #718096;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .stat-change.positive {
@@ -112,6 +117,7 @@
     font-weight: 600;
     color: #2d3748;
     margin: 0 0 1.5rem 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .actions-grid {
@@ -145,12 +151,14 @@
     font-weight: 600;
     color: #2d3748;
     margin: 0 0 0.5rem 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .action-card p {
     font-size: 0.875rem;
     color: #718096;
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 
@@ -177,6 +185,7 @@
     font-weight: 600;
     color: #2d3748;
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .view-all-link {
@@ -184,6 +193,7 @@
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .view-all-link:hover {
@@ -210,12 +220,13 @@
 
 .data-table thead th {
     padding: 1rem;
-    text-align: left;
+    background-color: rgba(5, 40, 156, 0.925);
     font-weight: 600;
-    color: #718096;
+    color: #e7e9ee;
     font-size: 0.875rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .data-table tbody tr {
@@ -231,6 +242,7 @@
     padding: 1rem;
     color: #2d3748;
     font-size: 0.9rem;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .id-badge {
@@ -253,6 +265,7 @@
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .status-badge.status-confirmado {

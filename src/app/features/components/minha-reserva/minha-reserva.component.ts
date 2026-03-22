@@ -25,7 +25,7 @@ export class MinhaReservaComponent {
   
   // Filtros
   filtroStatus: string = 'todas';
-  ordenacao: string = 'recentes';
+  ordenacao: string = 'viagem-proxima';
   
   // Estatísticas
   estatisticas = {
@@ -64,7 +64,7 @@ export class MinhaReservaComponent {
     }
 
     this.loading = true;
-    this.erro = '';
+    this.erro = ''; 
 
     this.reservaService.minhasReservas().subscribe({
       next: (reserva) => {
@@ -101,7 +101,7 @@ export class MinhaReservaComponent {
   aplicarFiltros(): void {
     let resultado = [...this.reservas];
 
-    // 🔧 CORREÇÃO: Comparação correta de status
+    // Comparação correta de status
     if (this.filtroStatus !== 'todas') {
       resultado = resultado.filter(r => {
         const statusReserva = r.statuReserva.toString().toLowerCase();
@@ -114,7 +114,7 @@ export class MinhaReservaComponent {
     switch (this.ordenacao) {
       case 'recentes':
         resultado.sort((a, b) => 
-          new Date(b.dataReserva).getTime() - new Date(a.dataReserva).getTime()
+          new  Date(b.dataReserva).getTime() - new Date(a.dataReserva).getTime() 
         );
         break;
       case 'antigas':
@@ -272,7 +272,7 @@ export class MinhaReservaComponent {
   formatarData(data: Date): string {
     return new Date(data).toLocaleDateString('pt-BR', {
       day: '2-digit',
-      month: 'short',
+      month: 'numeric',
       year: 'numeric'
     });
   }
@@ -284,7 +284,7 @@ export class MinhaReservaComponent {
     return new Date(data).toLocaleDateString('pt-BR', {
       weekday: 'long',
       day: '2-digit',
-      month: 'long',
+      month: 'numeric',
       year: 'numeric'
     });
   }

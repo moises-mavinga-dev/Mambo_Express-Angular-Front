@@ -3,7 +3,7 @@
     <!-- Header -->
     <div class="dashboard-header">
         <h1>Dashboard</h1>
-        <p>Bem-vindo ao painel administrativo da ViajarAngola</p>
+        <p>Bem-vindo ao painel administrativo da Marizunga</p>
     </div>
 
     <!-- Mensagem de Erro -->
@@ -82,6 +82,7 @@
     </div>
 
     <!-- Quick Actions -->
+    <!--
     <div class="quick-actions">
         <h2>Ações Rápidas</h2>
         <div class="actions-grid">
@@ -109,7 +110,7 @@
                 <p>Visualizar estatísticas</p>
             </a>
         </div>
-    </div>
+    </div>-->
 
     <!-- Recent Reservas -->
     <div class="recent-section">
@@ -120,7 +121,7 @@
 
         <div class="table-container">
             <table class="data-table">
-                <thead>
+                <thead class="thead-table">
                     <tr>
                         <th>ID</th>
                         <th>Usuário</th>
@@ -134,7 +135,7 @@
                 <tbody>
                     <tr *ngFor="let reserva of recentReservas">
                         <td><span class="id-badge">#{{ reserva.id.substring(0, 8) }}</span></td>
-                        <td>{{ reserva.usuario?.nomeUsuario }}</td>
+                        <td>{{ reserva.usuario?.nomeUsuario}}</td>
                         <td>{{ reserva.pacote?.nomePacote }}</td>
                         <td class="value-cell">{{ formatCurrency(reserva.valorTotal) }}</td>
                         <td>

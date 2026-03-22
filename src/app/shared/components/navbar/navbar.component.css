@@ -3,7 +3,7 @@
                                 justify-content: space-between;
                                 align-items: center;
                                 padding: 1.5rem 5%;
-                                background: linear-gradient(135deg, #063cece0 0%, #0f25e9bd 100%);
+                                background: linear-gradient(180deg, #0b1327 0%, #231ff5fb 100%);
                                 backdrop-filter: blur(10px);
                                 position: sticky;
                                 top: 0;
@@ -40,6 +40,7 @@
                                 font-size: 1.3rem;
                                 font-weight: 700;
                                 color: rgb(253, 252, 252);
+                                font-family: Arial, Helvetica, sans-serif;
                             }
                             
                             .nav-menu {
@@ -55,6 +56,7 @@
                                 transition: color 0.3s;
                                 padding: 0.5rem 0;
                                 position: relative;
+                                font-family: Arial, Helvetica, sans-serif;
                             }
                             
                             .nav-link:hover,
@@ -125,6 +127,7 @@
                                 font-size: 1rem;
                                 cursor: pointer;
                                 transition: all 0.3s ease;
+                                font-family: Arial, Helvetica, sans-serif;
                             }
                             
                             .user-avatar:hover {
@@ -167,11 +170,13 @@
                                 color: white;
                                 font-size: 1rem;
                                 margin-bottom: 0.25rem;
+                                font-family: Arial, Helvetica, sans-serif;
                             }
                             
                             .user-info span {
                                 color: #5e5f61;
                                 font-size: 0.85rem;
+                                font-family: Arial, Helvetica, sans-serif;
                             }
                             
                             .menu-item {
@@ -181,6 +186,7 @@
                                 padding: 0.875rem 1rem;
                                 color: #3362e4e1;
                                 text-decoration: none;
+                                font-family: Arial, Helvetica, sans-serif;
                                 /* border-radius: 10px;
                     transition: all 0.3s ease;
                     cursor: pointer;
@@ -209,6 +215,7 @@
                                 margin-left: 15rem;
                                 font-size: 20px;
                                 border: 0;
+                                font-family: Arial, Helvetica, sans-serif;
                             }
                             
                             .menu-item.menu-item.logout:hover {

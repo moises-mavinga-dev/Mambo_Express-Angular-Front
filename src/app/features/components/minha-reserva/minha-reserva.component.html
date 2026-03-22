@@ -33,7 +33,7 @@
     ======================================== -->
     <div class="stats-container">
         <div class="stat-card">
-            <div class="stat-icon">📦</div>
+            <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">📦</div>
             <div class="stat-info">
                 <span class="stat-value">{{ estatisticas.total }}</span>
                 <span class="stat-label">Total</span>
@@ -41,34 +41,34 @@
         </div>
 
         <div class="stat-card">
-            <div class="stat-icon">⏳</div>
-            <div class="stat-info">
-                <span class="stat-value">{{ estatisticas.pendentes }}</span>
-                <span class="stat-label">Pendentes</span>
+            <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">⏳</div>
+            <div class=" stat-info ">
+                <span class="stat-value ">{{ estatisticas.pendentes }}</span>
+                <span class="stat-label ">Pendentes</span>
             </div>
         </div>
 
-        <div class="stat-card">
-            <div class="stat-icon">✓</div>
-            <div class="stat-info">
-                <span class="stat-value">{{ estatisticas.confirmados }}</span>
-                <span class="stat-label">Confirmadas</span>
+        <div class="stat-card ">
+            <div class="stat-icon " style="background: linear-gradient(135deg, #30cfd0 0%, #083c67 100%);">✓</div>
+            <div class="stat-info ">
+                <span class="stat-value ">{{ estatisticas.confirmados }}</span>
+                <span class="stat-label ">Confirmadas</span>
             </div>
         </div>
 
-        <div class="stat-card">
-            <div class="stat-icon">💳</div>
-            <div class="stat-info">
-                <span class="stat-value">{{ estatisticas.pagos }}</span>
-                <span class="stat-label">Pagas</span>
+        <div class="stat-card ">
+            <div class="stat-icon ">💳</div>
+            <div class="stat-info ">
+                <span class="stat-value ">{{ estatisticas.pagos }}</span>
+                <span class="stat-label ">Pagas</span>
             </div>
         </div>
 
-        <div class="stat-card">
-            <div class="stat-icon">🏁</div>
-            <div class="stat-info">
-                <span class="stat-value">{{ estatisticas.concluidas }}</span>
-                <span class="stat-label">Concluídas</span>
+        <div class="stat-card ">
+            <div class="stat-icon " style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">🏁</div>
+            <div class=" stat-info ">
+                <span class="stat-value ">{{ estatisticas.concluidas }}</span>
+                <span class="stat-label ">Concluídas</span>
             </div>
         </div>
     </div>
@@ -76,33 +76,33 @@
     <!-- ========================================
          FILTROS E ORDENAÇÃO
     ======================================== -->
-    <div class="filters-container">
-        <div class="filter-tabs">
-            <button class="filter-tab" [class.active]="filtroStatus === 'todas'" (click)="mudarFiltro('todas')">
+    <div class="filters-container ">
+        <div class="filter-tabs ">
+            <button class="filter-tab " [class.active]="filtroStatus==='todas' " (click)="mudarFiltro( 'todas') ">
                 Todas ({{ estatisticas.total }})
             </button>
-            <button class="filter-tab" [class.active]="filtroStatus === 'pendente'" (click)="mudarFiltro('pendente')">
+            <button class="filter-tab " [class.active]="filtroStatus==='pendente' " (click)="mudarFiltro( 'pendente') ">
                 Pendentes ({{ estatisticas.pendentes }})
             </button>
-            <button class="filter-tab" [class.active]="filtroStatus === 'confirmado'" (click)="mudarFiltro('confirmado')">
+            <button class="filter-tab " [class.active]="filtroStatus==='confirmado' " (click)="mudarFiltro( 'confirmado') ">
                 Confirmadas ({{ estatisticas.confirmados }})
             </button>
-            <button class="filter-tab" [class.active]="filtroStatus === 'pago'" (click)="mudarFiltro('pago')">
+            <button class="filter-tab " [class.active]="filtroStatus==='pago' " (click)="mudarFiltro( 'pago') ">
                 Pagas ({{ estatisticas.pagos }})
             </button>
-            <button class="filter-tab" [class.active]="filtroStatus === 'cancelado'" (click)="mudarFiltro('cancelado')">
+            <button class="filter-tab " [class.active]="filtroStatus==='cancelado' " (click)="mudarFiltro( 'cancelado') ">
              Canceladas ({{ estatisticas.cancelados }})
             </button>
 
         </div>
 
-        <div class="sort-container">
-            <label for="ordenacao">Ordenar por:</label>
-            <select id="ordenacao" class="sort-select" [(ngModel)]="ordenacao" (change)="mudarOrdenacao($event)">
-                <option value="recentes">Mais recentes</option>
-                <option value="antigas">Mais antigas</option>
-                <option value="viagem-proxima">Viagem mais próxima</option>
-                <option value="viagem-distante">Viagem mais distante</option>
+        <div class="sort-container ">
+            <label for="ordenacao ">Ordenar por:</label>
+            <select id="ordenacao " class="sort-select " [(ngModel)]="ordenacao " (change)="mudarOrdenacao($event) ">
+                <option value="recentes ">Mais recentes</option>
+                <option value="antigas ">Mais antigas</option>
+                <option value="viagem-proxima ">Viagem mais próxima</option>
+                <option value="viagem-distante ">Viagem mais distante</option>
             </select>
         </div>
     </div>
@@ -110,15 +110,15 @@
     <!-- ========================================
          LOADING
     ======================================== -->
-    <div *ngIf="loading" class="loading-container">
-        <div class="spinner"></div>
+    <div *ngIf="loading " class="loading-container ">
+        <div class="spinner "></div>
         <p>Carregando suas reservas...</p>
     </div>
 
     <!-- ========================================
          LISTA DE RESERVAS
     ======================================== -->
-    <div *ngIf="!loading && reservasFiltradas.length > 0" class="reservas-list">
+    <div *ngIf="!loading && reservasFiltradas.length> 0" class="reservas-list">
         <div *ngFor="let reserva of reservasFiltradas" class="reserva-card" [class.viagem-proxima]="isViagemProxima(reserva.dataViagem)">
 
             <!-- Alerta de viagem próxima -->

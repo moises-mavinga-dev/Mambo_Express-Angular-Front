@@ -169,7 +169,7 @@ export class GerenciarReservasComponent implements OnInit {
   formatarData(data: Date): string {
     return new Date(data).toLocaleDateString('pt-BR', {
       day: '2-digit',
-      month: 'short',
+      month: 'numeric',
       year: 'numeric'
     });
   }

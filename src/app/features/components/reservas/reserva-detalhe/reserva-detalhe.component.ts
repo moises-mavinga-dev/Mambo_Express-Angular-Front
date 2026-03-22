@@ -233,7 +233,7 @@ export class ReservaDetalheComponent {
   formatarData(data: Date): string {
     return new Date(data).toLocaleDateString('pt-BR', {
       day: '2-digit',
-      month: 'short',
+      month: 'numeric',
       year: 'numeric'
     });
   }
@@ -245,7 +245,7 @@ export class ReservaDetalheComponent {
     return new Date(data).toLocaleDateString('pt-BR', {
       weekday: 'long',
       day: '2-digit',
-      month: 'long',
+      month: 'numeric',
       year: 'numeric'
     });
   }

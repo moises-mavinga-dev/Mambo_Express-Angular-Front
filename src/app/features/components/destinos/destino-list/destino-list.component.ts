@@ -34,7 +34,7 @@ ngOnInit() {
   this.loadDestinos();
 }  
 loadDestinos() {
-  this.destinoService.getAll().subscribe((destino: Destino[]) => {
+  this.destinoService.obterTodos().subscribe((destino: Destino[]) => {
     this.dataSource = destino;
   });
 }

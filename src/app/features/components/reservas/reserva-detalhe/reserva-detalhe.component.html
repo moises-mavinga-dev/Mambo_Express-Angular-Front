@@ -67,7 +67,7 @@
 
         <!-- Card Principal -->
         <div class="main-card">
-            
+
             <!-- Status e ID -->
             <div class="card-header-section">
                 <div>
@@ -98,7 +98,7 @@
             <!-- Informações Principais -->
             <div class="info-section">
                 <h3>Informações da Viagem</h3>
-                
+
                 <div class="info-grid-large">
                     <!-- Data da Reserva -->
                     <div class="info-card">
@@ -154,7 +154,7 @@
             <!-- Informações de Pagamento -->
             <div *ngIf="reserva.pagamentoConfirmado" class="info-section">
                 <h3>Informações de Pagamento</h3>
-                
+
                 <div class="payment-card">
                     <div class="payment-icon">💳</div>
                     <div class="payment-info">
@@ -170,7 +170,7 @@
             <!-- Timeline de Status -->
             <div class="info-section">
                 <h3>Histórico da Reserva</h3>
-                
+
                 <div class="timeline">
                     <div class="timeline-item" [class.active]="true">
                         <div class="timeline-marker">✓</div>
@@ -257,12 +257,7 @@
 
                 <div class="form-group">
                     <label>Motivo do Cancelamento <span class="required">*</span></label>
-                    <textarea 
-                        class="form-textarea" 
-                        [(ngModel)]="motivoCancelamento" 
-                        placeholder="Por favor, informe o motivo do cancelamento (mínimo 10 caracteres)..." 
-                        rows="4" 
-                        [disabled]="cancelando">
+                    <textarea class="form-textarea" [(ngModel)]="motivoCancelamento" placeholder="Por favor, informe o motivo do cancelamento (mínimo 10 caracteres)..." rows="4" [disabled]="cancelando">
                     </textarea>
                 </div>
 
@@ -275,10 +270,7 @@
                 <button class="btn-secondary" (click)="fecharModalCancelar()" [disabled]="cancelando">
                     Voltar
                 </button>
-                <button 
-                    class="btn-danger" 
-                    (click)="confirmarCancelamento()" 
-                    [disabled]="cancelando || !motivoCancelamento.trim() || motivoCancelamento.trim().length < 10">
+                <button class="btn-danger" (click)="confirmarCancelamento()" [disabled]="cancelando || !motivoCancelamento.trim() || motivoCancelamento.trim().length < 10">
                     {{ cancelando ? 'Cancelando...' : 'Confirmar Cancelamento' }}
                 </button>
             </div>

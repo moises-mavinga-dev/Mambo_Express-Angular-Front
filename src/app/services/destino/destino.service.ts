@@ -11,19 +11,19 @@ export class DestinoService {
 
    private apiUrl = `${environment.apiUrl}/api/Destino`;
  constructor(private http: HttpClient) {}
- getAll(): Observable<Destino[]> {
+ obterTodos(): Observable<Destino[]> {
    return this.http.get<Destino[]>(this.apiUrl);
  }
- getById(id: string): Observable<Destino> { // Mudado de number para string
+ obterPorId(id: string): Observable<Destino> { // Mudado de number para string
    return this.http.get<Destino>(`${this.apiUrl}/${id}`);
  }
- create(destino: DestinoCreateDto): Observable<Destino> {
+ criar(destino: DestinoCreateDto): Observable<Destino> {
    return this.http.post<Destino>(this.apiUrl, destino);
  }
- update(id: string, destino: DestinoUpdateDto): Observable<Destino> { // Mudado de number para string
+ atualizar(id: string, destino: DestinoUpdateDto): Observable<Destino> { // Mudado de number para string
    return this.http.put<Destino>(`${this.apiUrl}/${id}`, destino);
  }
- delete(id: string): Observable<void> { // Mudado de number para string
+ deletar(id: string): Observable<void> { // Mudado de number para string
    return this.http.delete<void>(`${this.apiUrl}/${id}`);
  }
 }

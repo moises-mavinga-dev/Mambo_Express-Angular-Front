@@ -50,7 +50,7 @@ export class DestinoCardComponent implements OnInit, OnDestroy {
   }
 
   loadDestinos() {
-    this.destinoService.getAll().subscribe({
+    this.destinoService.obterTodos().subscribe({
       next: (data) => this.destinos = data,
       error: (err) => console.error('Erro ao carregar destinos:', err)
     });
