@@ -25,7 +25,7 @@ export class MinhaReservaComponent {
   
   // Filtros
   filtroStatus: string = 'todas';
-  ordenacao: string = 'viagem-proxima';
+  ordenacao: string = 'recentes';
   
   // Estatísticas
   estatisticas = {
@@ -112,27 +112,39 @@ export class MinhaReservaComponent {
 
     // Ordenação
     switch (this.ordenacao) {
-      case 'recentes':
-        resultado.sort((a, b) => 
-          new  Date(b.dataReserva).getTime() - new Date(a.dataReserva).getTime() 
-        );
-        break;
-      case 'antigas':
-        resultado.sort((a, b) => 
-          new Date(a.dataReserva).getTime() - new Date(b.dataReserva).getTime()
-        );
-        break;
-      case 'viagem-proxima':
-        resultado.sort((a, b) => 
-          new Date(a.dataViagem).getTime() - new Date(b.dataViagem).getTime()
-        );
-        break;
-      case 'viagem-distante':
-        resultado.sort((a, b) => 
-          new Date(b.dataViagem).getTime() - new Date(a.dataViagem).getTime()
-        );
-        break;
-    }
+    case 'recentes':
+      resultado.sort((a, b) => {
+        const dataA = new Date(b.dataReserva).getTime();
+        const dataB = new Date(a.dataReserva).getTime();
+        return dataB - dataA;
+      });
+      break;
+      
+    case 'antigas':
+      resultado.sort((a, b) => {
+        const dataA = new Date(a.dataReserva).getTime();
+        const dataB = new Date(b.dataReserva).getTime();
+        return dataA - dataB;
+      });
+      break;
+      
+    case 'viagem-proxima':
+      resultado.sort((a, b) => {
+        const dataA = new Date(a.dataViagem).getTime();
+        const dataB = new Date(b.dataViagem).getTime();
+        return dataA - dataB; // Crescente (mais próximas primeiro)
+      });
+      break;
+      
+    case 'viagem-distante':
+      resultado.sort((a, b) => {
+        const dataA = new Date(a.dataViagem).getTime();
+        const dataB = new Date(b.dataViagem).getTime();
+        return dataB - dataA; // Decrescente (mais distantes primeiro)
+      });
+      break;
+  }
+
 
     this.reservasFiltradas = resultado;
   }

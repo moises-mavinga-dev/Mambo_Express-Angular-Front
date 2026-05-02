@@ -141,15 +141,16 @@ export class CheckoutComponent implements OnInit {
     }
 
     if (this.precisaCartao) {
-      if (!this.formData.numeroCartao || 
+      if (//!this.formData.numeroCartao || 
           !this.formData.nomeCartao || 
-          !this.formData.validadeCartao || 
-          !this.formData.cvv) {
+          !this.formData.validadeCartao 
+          //!this.formData.cvv
+          ) {
         this.errorMessage = 'Preencha todos os dados do cartão';
         return false;
       }
 
-      if (this.formData.numeroCartao.replace(/\s/g, '').length !== 16) {
+    /*  if (this.formData.numeroCartao.replace(/\s/g, '').length !== 16) {
         this.errorMessage = 'Número do cartão inválido';
         return false;
       }
@@ -157,13 +158,13 @@ export class CheckoutComponent implements OnInit {
       if (this.formData.cvv.length !== 3) {
         this.errorMessage = 'CVV inválido';
         return false;
-      }
+      }*/
     }
 
-    if (this.precisaTelefone && !this.formData.telefone) {
+   /* if (this.precisaTelefone && !this.formData.telefone) {
       this.errorMessage = 'Informe o número de telefone';
       return false;
-    }
+    }*/
 
     return true;
   }

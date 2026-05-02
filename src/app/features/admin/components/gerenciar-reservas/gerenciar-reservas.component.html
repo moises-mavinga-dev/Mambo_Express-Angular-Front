@@ -92,6 +92,9 @@
             </div>
         </div>
     </div>
+    <!--     grafico pizza
+ -->
+
 
     <!-- ========================================
          FILTROS E BUSCA
@@ -171,7 +174,7 @@
                         </td>
                         <td>{{ reserva.usuario?.nomeUsuario }}</td>
                         <td>{{ reserva.pacote?.nomePacote }}</td>
-                        <td>{{ reserva.destino?.nomeCidade }}</td>
+                        <td>{{ reserva.destino?.nomeCidade}}</td>
                         <td>{{ formatarData(reserva.dataReserva) }}</td>
                         <td>{{ formatarData(reserva.dataViagem) }}</td>
                         <td class="text-center">{{ reserva.quantidadePessoas }}</td>
@@ -182,14 +185,8 @@
                             </span>
                         </td>
                         <td>
-                            <div class="action-buttons">
-                                <button class="btn-icon" (click)="abrirModal(reserva)" title="Editar Status">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                    </svg>
-                                </button>
-                            </div>
+                            <button class="btn-icon btn-edit" (click)="abrirModal(reserva)" title="Editar">✏️</button>
+
                         </td>
                     </tr>
 

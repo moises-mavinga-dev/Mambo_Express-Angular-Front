@@ -1,6 +1,6 @@
 
 import { Destino } from "../destno-model/destino.model";
-import { Pacote, PacoteReservaDto } from "../pacote-model/pacote.model";
+import { Pacote, PacoteReponseReservaDto, PacoteReservaDto } from "../pacote-model/pacote.model";
 import { Pagamento } from "../pagamento-model/pagamento.model";
 import { Usuario } from "../usuarios.model/usuario.model";
 
@@ -24,20 +24,17 @@ export interface Reserva {
 export interface ReservaDto {
     id: string;                 // Guid → string
   usuarioId: string;
-
   pacoteId: string;
-  pacote: PacoteReservaDto;
-destino: Destino;
-
+  pacote: PacoteReponseReservaDto;
+   destinoId: string;
+  destino: Destino;
   dataReserva: string;        // DateTime → string (ISO)
   dataViagem: string;
-
   quantidadePessoas: number;
   valorTotal: number;
-
   statuReserva: string;
-
   pagamentoConfirmado: boolean;
+   
   
 }
 export enum StatuReserva {

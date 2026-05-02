@@ -8,8 +8,10 @@
         <!-- Logo -->
         <div class="sidebar-header">
             <div class="logo">
-                <span class="logo-icon">🚌</span>
-                <span class="logo-text" *ngIf="sidebarOpen">MaRiZuNgA</span>
+                <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    </svg>
+                <span class="logo-text" *ngIf="sidebarOpen">Mambo-Express</span>
             </div>
         </div>
 
@@ -78,6 +80,7 @@
                     </button>
 
                     <div class="user-dropdown" *ngIf="userMenuOpen">
+                        <button class="menu-item clouse" (click)="clouse()">x</button>
                         <a class="dropdown-item" (click)="goToProfile()">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -109,12 +112,13 @@
 
         <!-- Footer -->
         <footer class="admin-footer">
-            <p>&copy; 2024 ViajarAngola. Todos os direitos reservados.</p>
-            <div class="footer-links">
-                <a href="#">Suporte</a>
-                <a href="#">Documentação</a>
-                <a href="#">Termos</a>
-            </div>
+            <p>&copy; 2024 Mambo-Express
+                <. Todos os direitos reservados.</p>
+                    <div class="footer-links">
+                        <a href="#">Suporte</a>
+                        <a href="#">Documentação</a>
+                        <a href="#">Termos</a>
+                    </div>
         </footer>
     </div>
 

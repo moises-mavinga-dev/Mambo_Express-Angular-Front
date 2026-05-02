@@ -131,7 +131,7 @@
                 <div class="package-summary">
 
                     <div class="package-info">
-                        <h3>{{ reservas.pacote.nomePacote }}</h3>
+                        <h3>{{ reservas.pacote?.nomePacote }}</h3>
                         <p class="destination">
                             📍 {{ reservas.destino}}
                         </p>
@@ -159,7 +159,7 @@
 
                     <div class="price-row">
                         <span>Pacote</span>
-                        <span>{{ reservas.pacote.preco | currency:'AOA' }}</span>
+                        <span>{{ reservas.pacote?.preco| currency:'AOA' }}</span>
                     </div>
 
                     <div class="price-row">

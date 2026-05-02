@@ -145,14 +145,15 @@ export const routes: Routes = [
           import('./features/admin/components/configuracoes/configuracoes.component')
             .then(m => m.ConfiguracoesComponent),
         data: { title: 'Configurações' }
-      },
+      },*/
       {
         path: 'perfil',
         loadComponent: () => 
           import('./features/admin/components/perfil/perfil.component')
             .then(m => m.PerfilComponent),
         data: { title: 'Meu Perfil' }
-      }*/
+      }
+    
     ]
   },
   

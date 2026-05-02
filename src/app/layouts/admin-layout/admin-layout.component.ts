@@ -90,6 +90,10 @@ export class AdminLayoutComponent {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+   clouse(): void {
+    this.userMenuOpen = false;
+    this.authService.logout();
+  }
 
   goToProfile(): void {
     this.router.navigate(['/admin/perfil']);

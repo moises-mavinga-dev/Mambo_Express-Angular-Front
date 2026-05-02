@@ -52,8 +52,8 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.2rem;
+    font-weight: 500;
     white-space: nowrap;
 }
 
@@ -284,6 +284,19 @@
     justify-content: center;
     font-weight: 700;
     font-size: 1.1rem;
+}
+
+.menu-item.clouse {
+    background-color: rgba(255, 255, 255, 0.096);
+    color: #868383;
+    margin-left: 12rem;
+    font-size: 20px;
+    border: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.menu-item.menu-item.clouse:hover {
+    color: #3c3ce9;
 }
 
 .user-info {

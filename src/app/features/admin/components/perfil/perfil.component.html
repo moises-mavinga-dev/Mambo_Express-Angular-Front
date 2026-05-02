@@ -1,0 +1,121 @@
+<div class="perfil-container">
+    <div class="page-header">
+        <h1>Meu Perfil</h1>
+        <p>Gerencie suas informações pessoais e configurações de conta</p>
+    </div>
+
+    <!-- Mensagens -->
+    <div *ngIf="mensagemSucesso" class="alert alert-success">✓ {{ mensagemSucesso }}</div>
+    <div *ngIf="erro" class="alert alert-error">⚠️ {{ erro }}</div>
+
+    <div *ngIf="loading && !usuario" class="loading-container">
+        <div class="spinner"></div>
+        <p>Carregando perfil...</p>
+    </div>
+
+    <div *ngIf="!loading && usuario" class="perfil-content">
+
+        <!-- Card do Perfil -->
+        <div class="perfil-card">
+            <div class="perfil-header">
+                <div class="avatar-section">
+                    <div class="avatar-circle">{{ getIniciais() }}</div>
+                    <div class="perfil-info">
+                        <h2>{{ usuario.nomeUsuario }}</h2>
+                        <p>{{ usuario.email }}</p>
+                        <div class="roles-badges">
+                            <span *ngFor="let role of usuario.roles" [ngClass]="getRoleBadgeClass(role)" class="role-badge">
+                                {{ role }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="perfil-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Membro desde</span>
+                        <span class="meta-value">{{ formatarData(usuario.dataCriacao) }}</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Status</span>
+                        <span class="status-badge" [class.ativo]="usuario.ativo">
+                            {{ usuario.ativo ? 'Ativo' : 'Inativo' }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Informações Pessoais -->
+        <div class="section-card">
+            <div class="section-header">
+                <h3>Informações Pessoais</h3>
+                <button *ngIf="!editandoPerfil" class="btn-secondary" (click)="habilitarEdicao()">
+                    ✏️ Editar
+                </button>
+            </div>
+
+            <div class="section-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nome Completo *</label>
+                        <input type="text" class="form-input" [(ngModel)]="formPerfil.nomeUsuario" [disabled]="!editandoPerfil">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" class="form-input" [(ngModel)]="formPerfil.email" [disabled]="!editandoPerfil">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Telefone</label>
+                    <input type="text" class="form-input" [(ngModel)]="formPerfil.telefone" [disabled]="!editandoPerfil" placeholder="(+244) 900 000 000">
+                </div>
+
+                <div *ngIf="editandoPerfil" class="form-actions">
+                    <button class="btn-secondary" (click)="cancelarEdicao()">Cancelar</button>
+                    <button class="btn-primary" (click)="salvarPerfil()" [disabled]="loading">
+                        {{ loading ? 'Salvando...' : 'Salvar Alterações' }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alterar Senha -->
+        <div class="section-card">
+            <div class="section-header">
+                <h3>Segurança</h3>
+            </div>
+
+            <div class="section-body">
+                <p class="section-description">
+                    Para alterar sua senha, preencha os campos abaixo. A nova senha deve ter no mínimo 6 caracteres.
+                </p>
+
+                <div class="form-group">
+                    <label>Senha Atual *</label>
+                    <input type="password" class="form-input" [(ngModel)]="formSenha.senhaAtual" placeholder="Digite sua senha atual">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nova Senha *</label>
+                        <input type="password" class="form-input" [(ngModel)]="formSenha.novaSenha" placeholder="Mínimo 6 caracteres">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Confirmar Nova Senha *</label>
+                        <input type="password" class="form-input" [(ngModel)]="formSenha.confirmarSenha" placeholder="Digite novamente">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn-primary" (click)="alterarSenha()" [disabled]="loadingSenha">
+                        {{ loadingSenha ? 'Alterando...' : '🔒 Alterar Senha' }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

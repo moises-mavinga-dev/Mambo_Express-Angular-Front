@@ -536,3 +536,9 @@
         width: 100%;
     }
 }
+
+.chart-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 2rem auto;
+}

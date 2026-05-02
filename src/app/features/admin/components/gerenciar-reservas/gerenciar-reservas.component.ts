@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Reserva, StatuReserva } from '../../../models/reserva-model/reserva.model';
 import { ReservaService } from '../../../../services/reserva/reserva.service';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-gerenciar-reservas',
@@ -52,7 +51,7 @@ export class GerenciarReservasComponent implements OnInit {
   }
 
   carregarReservas(): void {
-    this.loading = true;
+    this.loading = true;  
     this.erro = '';
 
     this.reservaService.todasReservas().subscribe({
