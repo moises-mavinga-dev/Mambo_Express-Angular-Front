@@ -46,7 +46,8 @@ export class GerenciarPacotesComponent implements OnInit {
     preco: 0,
     duracao: 0,
     destinoId: '',
-    disponivel: true
+    disponivel: true,
+     vagasDisponiveis: 0
   };
   
   // Estatísticas
@@ -172,7 +173,9 @@ export class GerenciarPacotesComponent implements OnInit {
       preco: pacote.preco || 0,
       duracao: pacote.duracao || 0,
       destinoId: pacote.destinoId || '',
+      vagasDisponiveis:pacote.vagasDisponiveis || 0,
       disponivel: pacote.disponivel
+      
     };
     this.showModal = true;
   }
@@ -189,6 +192,7 @@ export class GerenciarPacotesComponent implements OnInit {
       preco: 0,
       duracao: 0,
       destinoId: '',
+        vagasDisponiveis: 0,
       disponivel: true
     };
   }
@@ -226,7 +230,8 @@ export class GerenciarPacotesComponent implements OnInit {
         descricao: this.form.descricao,
         preco: this.form.preco,
         duracao: this.form.duracao,
-        destinoId: this.form.destinoId
+        destinoId: this.form.destinoId,
+        vagasDisponiveis:this.form.vagasDisponiveis
       };
 
       this.pacoteService.criar(novoPacote).subscribe({
@@ -321,7 +326,7 @@ export class GerenciarPacotesComponent implements OnInit {
     return destino ? `${destino.nomeCidade}, ${destino.pais}` : 'N/A';
   }
 
-  formatarDuracao(dias: number): string {
-    return dias === 1 ? '1 dia' : `${dias} dias`;
+  formatarDuracao(horas: number): string {
+    return horas === 6 ? '6 horas' : `${horas} horas`;
   }
 }

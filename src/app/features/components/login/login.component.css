@@ -24,9 +24,17 @@
      }
      
      .logo-icon {
-         font-size: 2em;
-         margin-bottom: 1rem;
-         filter: drop-shadow(0 0 20px rgba(71, 100, 228, 0.5));
+         font-size: 0.2em;
+         margin-bottom: 0.2rem;
+     }
+     
+     .info-icon {
+         width: 100px;
+         height: 100px;
+         stroke: #3c86e7;
+         stroke-width: 2;
+         flex-shrink: 0;
+         margin-top: 2px;
      }
      
      .logo-section h1 {

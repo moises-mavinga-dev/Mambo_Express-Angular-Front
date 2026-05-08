@@ -25,7 +25,7 @@ export interface PagamentoComReservaDto {
 
 export interface ReservaResumida {
   id: string;
-nomeUsuario: string;  
+ nomeUsuario: string;  
   dataReserva: Date;
 }
 

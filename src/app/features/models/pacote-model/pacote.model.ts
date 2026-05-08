@@ -9,6 +9,7 @@ export interface Pacote {
   destinoId: string;
   destino:Destino;
   disponivel: boolean;
+  vagasDisponiveis:number;
 }
 
 export interface CriarPacoteDto {
@@ -17,6 +18,7 @@ export interface CriarPacoteDto {
   preco: number;
   duracao: number;
   destinoId: string;
+    vagasDisponiveis:number;
 }
 
 export interface AtualizarPacoteDto {

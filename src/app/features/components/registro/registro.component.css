@@ -12,13 +12,14 @@
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 20px;
     padding: 3rem;
-    max-width: 350px;
+    max-width: 400px;
     width: 40%;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
     background-color: white;
 }
 
-.header {
+
+/* .header {
     text-align: center;
     margin-bottom: 0.2rem;
 }
@@ -33,6 +34,40 @@
 
 .header p {
     color: #23262b;
+}
+ */
+
+.logo-section {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.logo-icon {
+    font-size: 0.2em;
+    margin-bottom: 0.2rem;
+}
+
+.info-icon {
+    width: 100px;
+    height: 100px;
+    stroke: #3c86e7;
+    stroke-width: 2;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.logo-section h1 {
+    color: #3062ec;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.logo-section p {
+    color: #94a3b8;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .error-alert {
@@ -60,7 +95,7 @@
     width: 100%;
     padding: 0.5rem;
     background: rgba(244, 247, 247, 0.438);
-    border: 2px solid rgba(234, 239, 240, 0.644);
+    border: 2px solid rgba(234, 239, 240, 0.966);
     border-radius: 10px;
     color: rgb(27, 24, 24);
     font-size: 1rem;

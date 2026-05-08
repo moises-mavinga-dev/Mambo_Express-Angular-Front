@@ -38,18 +38,18 @@
 }
 
 .role-admin {
-    background: #fee;
-    color: #c53030;
+    background: rgb(212, 56, 56);
+    color: white;
 }
 
 .role-agente {
-    background: #edf2ff;
-    color: #667eea;
+    background: #667eea;
+    color: white;
 }
 
 .role-cliente {
-    background: #f0fdf4;
-    color: #48bb78;
+    background: #48bb78;
+    color: white;
 }
 
 

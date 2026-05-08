@@ -101,6 +101,7 @@
                         <th>Destino</th>
                         <th>Duração</th>
                         <th>Preço</th>
+                        <th>Quantidade</th>
                         <th>Disponível</th>
                         <th>Ações</th>
                     </tr>
@@ -116,7 +117,9 @@
                         <td>{{ getNomeDestino(pacote.destinoId) }}</td>
                         <td>{{ formatarDuracao(pacote.duracao) }}</td>
                         <td class="value-cell">{{ formatarValor(pacote.preco) }}</td>
+                        <td>{{pacote.vagasDisponiveis}}</td>
                         <td>
+
                             <button class="toggle-btn" [class.active]="pacote.disponivel" (click)="toggleDisponivel(pacote)" title="Clique para alterar">
                                 <span class="toggle-slider"></span>
                                 <span class="toggle-label">{{ pacote.disponivel ? 'Sim' : 'Não' }}</span>
@@ -201,7 +204,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Duração (dias) *</label>
+                        <label>Duração (horas) *</label>
                         <input type="number" class="form-input" [(ngModel)]="form.duracao" min="1" placeholder="0">
                     </div>
                 </div>

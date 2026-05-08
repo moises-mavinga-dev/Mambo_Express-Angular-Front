@@ -3,7 +3,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { Component } from '@angular/core';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { HomeComponent } from './features/home/home/home.component';
-import { UsuarioTableComponent } from './features/components/usuario-table/usuario-table.component';
 import { authGuard, roleGuard } from './core/guads/auth.guard';
 import { LoginComponent } from './features/components/login/login.component';
 import { CriarReservaComponent } from './features/components/criar-reserva/criar-reserva.component';
@@ -79,11 +78,7 @@ export const routes: Routes = [
           .then(m => m.CheckoutComponent)
       },
       
-      {
-        path: 'usuariotable',
-        loadComponent: () => import('./features/components/usuario-table/usuario-table.component')
-          .then(m => m.UsuarioTableComponent)
-      },
+   
       
     ]
   },
